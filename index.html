@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What is "social"?</title>  <!-- CHANGE THIS (title) -->
+      
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
+      
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-audio-button-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-audio-keyboard-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.0"></script>
+    <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+      
+      
+  </head>
+  <body></body>
+    
+  <script>
+
+    var jsPsych = initJsPsych({
+        show_progress_bar:false,
+        on_data_update: function(){
+            jsPsych.data.addProperties({worker_id: urlvar.workerId});
+        },
+        on_finish: function(){
+            jsPsych.data.addProperties({worker_id: urlvar.workerId});
+        },
+        max_load_time: 120000
+    });
+
+
+    
+  // generating a user id and file name  
+  var secret_code  = jsPsych.randomization.randomID(8);
+  var filename = "triplets_social_words_" + secret_code + ".csv"; // CHANGE THIS (file name)
+
+    // this is to save to OSF using DataPipe
+      const save_data = {
+        type: jsPsychPipe,
+        action: "save",
+        experiment_id: "OWSfXyJtv9w5",
+        filename: filename,
+        data_string: ()=>jsPsych.data.get().csv()
+      };
+
+          /* create timeline */
+    var timeline = [];
+      
+    // pulling info re: mechanical turk hit
+      var urlvar = jsPsych.data.urlVariables();  
+      
+    
+    var preload = {
+        type: jsPsychPreload,
+        auto_preload: true,
+        images: [
+                'resources/adolescent.png',
+                'resources/adult.png',
+                'resources/affectionate.png',
+                'resources/aggressive.png',
+                'resources/ambitious.png',
+                'resources/angry.png',
+                'resources/anxious.png',
+                'resources/apathy.png',
+                'resources/appalled.png',
+                'resources/appealing.png',
+                'resources/aunt.png',
+                'resources/baby.png',
+                'resources/bachelor.png',
+                'resources/boastful.png',
+                'resources/bossy.png',
+                'resources/boy.png',
+                'resources/brave.png',
+                'resources/bride.png',
+                'resources/bright.png',
+                'resources/calm.png',
+                'resources/careful.png',
+                'resources/careless.png',
+                'resources/cautious.png',
+                'resources/charitable.png',
+                'resources/cheerful.png',
+                'resources/clever.png',
+                'resources/coarse.png',
+                'resources/communicative.png',
+                'resources/confident.png',
+                'resources/confronted.png',
+                'resources/considerate.png',
+                'resources/cowardly.png',
+                'resources/critical.png',
+                'resources/cruelty.png',
+                'resources/cynical.png',
+                'resources/dad.png',
+                'resources/daring.png',
+                'resources/debutante.png',
+                'resources/deceitful.png',
+                'resources/decisive.png',
+                'resources/disagreeable.png',
+                'resources/dishonesty.png',
+                'resources/disrespectful.png',
+                'resources/distaste.png',
+                'resources/distrustful.png',
+                'resources/docile.png',
+                'resources/dutiful.png',
+                'resources/eager.png',
+                'resources/eccentricity.png',
+                'resources/elder.png',
+                'resources/emotional.png',
+                'resources/empathic.png',
+                'resources/enterprising.png',
+                'resources/exonerated.png',
+                'resources/extravagance.png',
+                'resources/father.png',
+                'resources/faultfinding.png',
+                'resources/firm.png',
+                'resources/flexible.png',
+                'resources/friendly.png',
+                'resources/generous.png',
+                'resources/gent.png',
+                'resources/girl.png',
+                'resources/grampa.png',
+                'resources/granny.png',
+                'resources/grave.png',
+                'resources/greed.png',
+                'resources/groom.png',
+                'resources/grownup.png',
+                'resources/guarded.png',
+                'resources/happy.png',
+                'resources/harsh.png',
+                'resources/helpful.png',
+                'resources/helpless.png',
+                'resources/honesty.png',
+                'resources/humble.png',
+                'resources/idealistic.png',
+                'resources/ignorance.png',
+                'resources/impatience.png',
+                'resources/impolite.png',
+                'resources/impractical.png',
+                'resources/impulsive.png',
+                'resources/indiscretion.png',
+                'resources/infant.png',
+                'resources/inhibited.png',
+                'resources/insecure.png',
+                'resources/insincere.png',
+                'resources/intellectual.png',
+                'resources/intelligence.png',
+                'resources/intimate.png',
+                'resources/intolerant.png',
+                'resources/irresponsible.png',
+                'resources/juvenile.png',
+                'resources/kid.png',
+                'resources/kind.png',
+                'resources/lad.png',
+                'resources/lady.png',
+                'resources/lass.png',
+                'resources/lazy.png',
+                'resources/lenient.png',
+                'resources/lively.png',
+                'resources/lured.png',
+                'resources/lustful.png',
+                'resources/mature.png',
+                'resources/miserly.png',
+                'resources/moral.png',
+                'resources/mortified.png',
+                'resources/mother.png',
+                'resources/nephew.png',
+                'resources/nervous.png',
+                'resources/newborn.png',
+                'resources/niece.png',
+                'resources/nostalgic.png',
+                'resources/passion.png',
+                'resources/patience.png',
+                'resources/pensioner.png',
+                'resources/playful.png',
+                'resources/polite.png',
+                'resources/prideless.png',
+                'resources/proud.png',
+                'resources/quarrelsome.png',
+                'resources/reasonable.png',
+                'resources/reassured.png',
+                'resources/rebellious.png',
+                'resources/resentful.png',
+                'resources/respectful.png',
+                'resources/responsibility.png',
+                'resources/restless.png',
+                'resources/rigid.png',
+                'resources/romantic.png',
+                'resources/rough.png',
+                'resources/sad.png',
+                'resources/selfish.png',
+                'resources/senior.png',
+                'resources/sentimental.png',
+                'resources/smart.png',
+                'resources/sociable.png',
+                'resources/stern.png',
+                'resources/stingy.png',
+                'resources/subdued.png',
+                'resources/subservient.png',
+                'resources/suspicious.png',
+                'resources/talkative.png',
+                'resources/teen.png',
+                'resources/temperamental.png',
+                'resources/thoughtful.png',
+                'resources/toddler.png',
+                'resources/tolerance.png',
+                'resources/touchy.png',
+                'resources/tough.png',
+                'resources/trustful.png',
+                'resources/truthful.png',
+                'resources/unambitious.png',
+                'resources/uncle.png',
+                'resources/uncritical.png',
+                'resources/understanding.png',
+                'resources/uneasy.png',
+                'resources/unintelligent.png',
+                'resources/unkind.png',
+                'resources/unsociable.png',
+                'resources/unstable.png',
+                'resources/vain.png',
+                'resources/vibrant.png',
+                'resources/widow.png',
+                'resources/wise.png',
+                'resources/woman.png',
+                'resources/youth.png'
+               ],
+        show_progress_bar: true,
+        message: "Loading experiment files...",
+        error_message: "Oops! There's a problem loading files. Please refresh the page to try again."
+    }  
+    timeline.push(preload);
+    
+      
+        var stimuli = [
+                        {item: 'resources/adolescent.png'},
+                        {item: 'resources/adult.png'},
+                        {item: 'resources/affectionate.png'},
+                        {item: 'resources/aggressive.png'},
+                        {item: 'resources/ambitious.png'},
+                        {item: 'resources/angry.png'},
+                        {item: 'resources/anxious.png'},
+                        {item: 'resources/apathy.png'},
+                        {item: 'resources/appalled.png'},
+                        {item: 'resources/appealing.png'},
+                        {item: 'resources/aunt.png'},
+                        {item: 'resources/baby.png'},
+                        {item: 'resources/bachelor.png'},
+                        {item: 'resources/boastful.png'},
+                        {item: 'resources/bossy.png'},
+                        {item: 'resources/boy.png'},
+                        {item: 'resources/brave.png'},
+                        {item: 'resources/bride.png'},
+                        {item: 'resources/bright.png'},
+                        {item: 'resources/calm.png'},
+                        {item: 'resources/careful.png'},
+                        {item: 'resources/careless.png'},
+                        {item: 'resources/cautious.png'},
+                        {item: 'resources/charitable.png'},
+                        {item: 'resources/cheerful.png'},
+                        {item: 'resources/clever.png'},
+                        {item: 'resources/coarse.png'},
+                        {item: 'resources/communicative.png'},
+                        {item: 'resources/confident.png'},
+                        {item: 'resources/confronted.png'},
+                        {item: 'resources/considerate.png'},
+                        {item: 'resources/cowardly.png'},
+                        {item: 'resources/critical.png'},
+                        {item: 'resources/cruelty.png'},
+                        {item: 'resources/cynical.png'},
+                        {item: 'resources/dad.png'},
+                        {item: 'resources/daring.png'},
+                        {item: 'resources/debutante.png'},
+                        {item: 'resources/deceitful.png'},
+                        {item: 'resources/decisive.png'},
+                        {item: 'resources/disagreeable.png'},
+                        {item: 'resources/dishonesty.png'},
+                        {item: 'resources/disrespectful.png'},
+                        {item: 'resources/distaste.png'},
+                        {item: 'resources/distrustful.png'},
+                        {item: 'resources/docile.png'},
+                        {item: 'resources/dutiful.png'},
+                        {item: 'resources/eager.png'},
+                        {item: 'resources/eccentricity.png'},
+                        {item: 'resources/elder.png'},
+                        {item: 'resources/emotional.png'},
+                        {item: 'resources/empathic.png'},
+                        {item: 'resources/enterprising.png'},
+                        {item: 'resources/exonerated.png'},
+                        {item: 'resources/extravagance.png'},
+                        {item: 'resources/father.png'},
+                        {item: 'resources/faultfinding.png'},
+                        {item: 'resources/firm.png'},
+                        {item: 'resources/flexible.png'},
+                        {item: 'resources/friendly.png'},
+                        {item: 'resources/generous.png'},
+                        {item: 'resources/gent.png'},
+                        {item: 'resources/girl.png'},
+                        {item: 'resources/grampa.png'},
+                        {item: 'resources/granny.png'},
+                        {item: 'resources/grave.png'},
+                        {item: 'resources/greed.png'},
+                        {item: 'resources/groom.png'},
+                        {item: 'resources/grownup.png'},
+                        {item: 'resources/guarded.png'},
+                        {item: 'resources/happy.png'},
+                        {item: 'resources/harsh.png'},
+                        {item: 'resources/helpful.png'},
+                        {item: 'resources/helpless.png'},
+                        {item: 'resources/honesty.png'},
+                        {item: 'resources/humble.png'},
+                        {item: 'resources/idealistic.png'},
+                        {item: 'resources/ignorance.png'},
+                        {item: 'resources/impatience.png'},
+                        {item: 'resources/impolite.png'},
+                        {item: 'resources/impractical.png'},
+                        {item: 'resources/impulsive.png'},
+                        {item: 'resources/indiscretion.png'},
+                        {item: 'resources/infant.png'},
+                        {item: 'resources/inhibited.png'},
+                        {item: 'resources/insecure.png'},
+                        {item: 'resources/insincere.png'},
+                        {item: 'resources/intellectual.png'},
+                        {item: 'resources/intelligence.png'},
+                        {item: 'resources/intimate.png'},
+                        {item: 'resources/intolerant.png'},
+                        {item: 'resources/irresponsible.png'},
+                        {item: 'resources/juvenile.png'},
+                        {item: 'resources/kid.png'},
+                        {item: 'resources/kind.png'},
+                        {item: 'resources/lad.png'},
+                        {item: 'resources/lady.png'},
+                        {item: 'resources/lass.png'},
+                        {item: 'resources/lazy.png'},
+                        {item: 'resources/lenient.png'},
+                        {item: 'resources/lively.png'},
+                        {item: 'resources/lured.png'},
+                        {item: 'resources/lustful.png'},
+                        {item: 'resources/mature.png'},
+                        {item: 'resources/miserly.png'},
+                        {item: 'resources/moral.png'},
+                        {item: 'resources/mortified.png'},
+                        {item: 'resources/mother.png'},
+                        {item: 'resources/nephew.png'},
+                        {item: 'resources/nervous.png'},
+                        {item: 'resources/newborn.png'},
+                        {item: 'resources/niece.png'},
+                        {item: 'resources/nostalgic.png'},
+                        {item: 'resources/passion.png'},
+                        {item: 'resources/patience.png'},
+                        {item: 'resources/pensioner.png'},
+                        {item: 'resources/playful.png'},
+                        {item: 'resources/polite.png'},
+                        {item: 'resources/prideless.png'},
+                        {item: 'resources/proud.png'},
+                        {item: 'resources/quarrelsome.png'},
+                        {item: 'resources/reasonable.png'},
+                        {item: 'resources/reassured.png'},
+                        {item: 'resources/rebellious.png'},
+                        {item: 'resources/resentful.png'},
+                        {item: 'resources/respectful.png'},
+                        {item: 'resources/responsibility.png'},
+                        {item: 'resources/restless.png'},
+                        {item: 'resources/rigid.png'},
+                        {item: 'resources/romantic.png'},
+                        {item: 'resources/rough.png'},
+                        {item: 'resources/sad.png'},
+                        {item: 'resources/selfish.png'},
+                        {item: 'resources/senior.png'},
+                        {item: 'resources/sentimental.png'},
+                        {item: 'resources/smart.png'},
+                        {item: 'resources/sociable.png'},
+                        {item: 'resources/stern.png'},
+                        {item: 'resources/stingy.png'},
+                        {item: 'resources/subdued.png'},
+                        {item: 'resources/subservient.png'},
+                        {item: 'resources/suspicious.png'},
+                        {item: 'resources/talkative.png'},
+                        {item: 'resources/teen.png'},
+                        {item: 'resources/temperamental.png'},
+                        {item: 'resources/thoughtful.png'},
+                        {item: 'resources/toddler.png'},
+                        {item: 'resources/tolerance.png'},
+                        {item: 'resources/touchy.png'},
+                        {item: 'resources/tough.png'},
+                        {item: 'resources/trustful.png'},
+                        {item: 'resources/truthful.png'},
+                        {item: 'resources/unambitious.png'},
+                        {item: 'resources/uncle.png'},
+                        {item: 'resources/uncritical.png'},
+                        {item: 'resources/understanding.png'},
+                        {item: 'resources/uneasy.png'},
+                        {item: 'resources/unintelligent.png'},
+                        {item: 'resources/unkind.png'},
+                        {item: 'resources/unsociable.png'},
+                        {item: 'resources/unstable.png'},
+                        {item: 'resources/vain.png'},
+                        {item: 'resources/vibrant.png'},
+                        {item: 'resources/widow.png'},
+                        {item: 'resources/wise.png'},
+                        {item: 'resources/woman.png'},
+                        {item: 'resources/youth.png'}
+            ]
+        
+        
+
+      var stimuli_arr = [
+                        'resources/adolescent.png',
+                        'resources/adult.png',
+                        'resources/affectionate.png',
+                        'resources/aggressive.png',
+                        'resources/ambitious.png',
+                        'resources/angry.png',
+                        'resources/anxious.png',
+                        'resources/apathy.png',
+                        'resources/appalled.png',
+                        'resources/appealing.png',
+                        'resources/aunt.png',
+                        'resources/baby.png',
+                        'resources/bachelor.png',
+                        'resources/boastful.png',
+                        'resources/bossy.png',
+                        'resources/boy.png',
+                        'resources/brave.png',
+                        'resources/bride.png',
+                        'resources/bright.png',
+                        'resources/calm.png',
+                        'resources/careful.png',
+                        'resources/careless.png',
+                        'resources/cautious.png',
+                        'resources/charitable.png',
+                        'resources/cheerful.png',
+                        'resources/clever.png',
+                        'resources/coarse.png',
+                        'resources/communicative.png',
+                        'resources/confident.png',
+                        'resources/confronted.png',
+                        'resources/considerate.png',
+                        'resources/cowardly.png',
+                        'resources/critical.png',
+                        'resources/cruelty.png',
+                        'resources/cynical.png',
+                        'resources/dad.png',
+                        'resources/daring.png',
+                        'resources/debutante.png',
+                        'resources/deceitful.png',
+                        'resources/decisive.png',
+                        'resources/disagreeable.png',
+                        'resources/dishonesty.png',
+                        'resources/disrespectful.png',
+                        'resources/distaste.png',
+                        'resources/distrustful.png',
+                        'resources/docile.png',
+                        'resources/dutiful.png',
+                        'resources/eager.png',
+                        'resources/eccentricity.png',
+                        'resources/elder.png',
+                        'resources/emotional.png',
+                        'resources/empathic.png',
+                        'resources/enterprising.png',
+                        'resources/exonerated.png',
+                        'resources/extravagance.png',
+                        'resources/father.png',
+                        'resources/faultfinding.png',
+                        'resources/firm.png',
+                        'resources/flexible.png',
+                        'resources/friendly.png',
+                        'resources/generous.png',
+                        'resources/gent.png',
+                        'resources/girl.png',
+                        'resources/grampa.png',
+                        'resources/granny.png',
+                        'resources/grave.png',
+                        'resources/greed.png',
+                        'resources/groom.png',
+                        'resources/grownup.png',
+                        'resources/guarded.png',
+                        'resources/happy.png',
+                        'resources/harsh.png',
+                        'resources/helpful.png',
+                        'resources/helpless.png',
+                        'resources/honesty.png',
+                        'resources/humble.png',
+                        'resources/idealistic.png',
+                        'resources/ignorance.png',
+                        'resources/impatience.png',
+                        'resources/impolite.png',
+                        'resources/impractical.png',
+                        'resources/impulsive.png',
+                        'resources/indiscretion.png',
+                        'resources/infant.png',
+                        'resources/inhibited.png',
+                        'resources/insecure.png',
+                        'resources/insincere.png',
+                        'resources/intellectual.png',
+                        'resources/intelligence.png',
+                        'resources/intimate.png',
+                        'resources/intolerant.png',
+                        'resources/irresponsible.png',
+                        'resources/juvenile.png',
+                        'resources/kid.png',
+                        'resources/kind.png',
+                        'resources/lad.png',
+                        'resources/lady.png',
+                        'resources/lass.png',
+                        'resources/lazy.png',
+                        'resources/lenient.png',
+                        'resources/lively.png',
+                        'resources/lured.png',
+                        'resources/lustful.png',
+                        'resources/mature.png',
+                        'resources/miserly.png',
+                        'resources/moral.png',
+                        'resources/mortified.png',
+                        'resources/mother.png',
+                        'resources/nephew.png',
+                        'resources/nervous.png',
+                        'resources/newborn.png',
+                        'resources/niece.png',
+                        'resources/nostalgic.png',
+                        'resources/passion.png',
+                        'resources/patience.png',
+                        'resources/pensioner.png',
+                        'resources/playful.png',
+                        'resources/polite.png',
+                        'resources/prideless.png',
+                        'resources/proud.png',
+                        'resources/quarrelsome.png',
+                        'resources/reasonable.png',
+                        'resources/reassured.png',
+                        'resources/rebellious.png',
+                        'resources/resentful.png',
+                        'resources/respectful.png',
+                        'resources/responsibility.png',
+                        'resources/restless.png',
+                        'resources/rigid.png',
+                        'resources/romantic.png',
+                        'resources/rough.png',
+                        'resources/sad.png',
+                        'resources/selfish.png',
+                        'resources/senior.png',
+                        'resources/sentimental.png',
+                        'resources/smart.png',
+                        'resources/sociable.png',
+                        'resources/stern.png',
+                        'resources/stingy.png',
+                        'resources/subdued.png',
+                        'resources/subservient.png',
+                        'resources/suspicious.png',
+                        'resources/talkative.png',
+                        'resources/teen.png',
+                        'resources/temperamental.png',
+                        'resources/thoughtful.png',
+                        'resources/toddler.png',
+                        'resources/tolerance.png',
+                        'resources/touchy.png',
+                        'resources/tough.png',
+                        'resources/trustful.png',
+                        'resources/truthful.png',
+                        'resources/unambitious.png',
+                        'resources/uncle.png',
+                        'resources/uncritical.png',
+                        'resources/understanding.png',
+                        'resources/uneasy.png',
+                        'resources/unintelligent.png',
+                        'resources/unkind.png',
+                        'resources/unsociable.png',
+                        'resources/unstable.png',
+                        'resources/vain.png',
+                        'resources/vibrant.png',
+                        'resources/widow.png',
+                        'resources/wise.png',
+                        'resources/woman.png',
+                        'resources/youth.png'
+      ]
+      
+     
+      
+      //plan: 
+      //1) make a pool of random triplets
+      //2) sample
+    var validation = [
+                    {head: 'resources/sociable.png',	choice_1: 'resources/intellectual.png',	choice_2: 'resources/helpless.png'},
+                    {head: 'resources/distaste.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/flexible.png'},
+                    {head: 'resources/lively.png',	choice_1: 'resources/restless.png',	choice_2: 'resources/greed.png'},
+                    {head: 'resources/pensioner.png',	choice_1: 'resources/boy.png',	choice_2: 'resources/gent.png'},
+                    {head: 'resources/considerate.png',	choice_1: 'resources/granny.png',	choice_2: 'resources/juvenile.png'},
+                    {head: 'resources/passion.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/nervous.png'},
+                    {head: 'resources/careful.png',	choice_1: 'resources/unstable.png',	choice_2: 'resources/cowardly.png'},
+                    {head: 'resources/father.png',	choice_1: 'resources/emotional.png',	choice_2: 'resources/youth.png'},
+                    {head: 'resources/debutante.png',	choice_1: 'resources/inhibited.png',	choice_2: 'resources/sociable.png'},
+                    {head: 'resources/trustful.png',	choice_1: 'resources/playful.png',	choice_2: 'resources/intolerant.png'},
+                    {head: 'resources/unambitious.png',	choice_1: 'resources/aunt.png',	choice_2: 'resources/infant.png'},
+                    {head: 'resources/unkind.png',	choice_1: 'resources/niece.png',	choice_2: 'resources/critical.png'},
+                    {head: 'resources/adolescent.png',	choice_1: 'resources/subservient.png',	choice_2: 'resources/debutante.png'},
+                    {head: 'resources/cruelty.png',	choice_1: 'resources/talkative.png',	choice_2: 'resources/uneasy.png'},
+                    {head: 'resources/elder.png',	choice_1: 'resources/prideless.png',	choice_2: 'resources/mature.png'},
+                    {head: 'resources/resentful.png',	choice_1: 'resources/emotional.png',	choice_2: 'resources/reasonable.png'},
+                    {head: 'resources/enterprising.png',	choice_1: 'resources/calm.png',	choice_2: 'resources/indiscretion.png'},
+                    {head: 'resources/moral.png',	choice_1: 'resources/empathic.png',	choice_2: 'resources/stingy.png'},
+                    {head: 'resources/firm.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/greed.png'},
+                    {head: 'resources/truthful.png',	choice_1: 'resources/appalled.png',	choice_2: 'resources/firm.png'},
+                    {head: 'resources/unstable.png',	choice_1: 'resources/dishonesty.png',	choice_2: 'resources/subdued.png'},
+                    {head: 'resources/suspicious.png',	choice_1: 'resources/cheerful.png',	choice_2: 'resources/prideless.png'},
+                    {head: 'resources/idealistic.png',	choice_1: 'resources/sociable.png',	choice_2: 'resources/nostalgic.png'},
+                    {head: 'resources/adult.png',	choice_1: 'resources/communicative.png',	choice_2: 'resources/niece.png'},
+                    {head: 'resources/debutante.png',	choice_1: 'resources/miserly.png',	choice_2: 'resources/intolerant.png'},
+                    {head: 'resources/decisive.png',	choice_1: 'resources/generous.png',	choice_2: 'resources/sad.png'},
+                    {head: 'resources/confronted.png',	choice_1: 'resources/mature.png',	choice_2: 'resources/extravagance.png'},
+                    {head: 'resources/daring.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/impatience.png'},
+                    {head: 'resources/angry.png',	choice_1: 'resources/truthful.png',	choice_2: 'resources/dishonesty.png'},
+                    {head: 'resources/disagreeable.png',	choice_1: 'resources/niece.png',	choice_2: 'resources/enterprising.png'},
+                    {head: 'resources/extravagance.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/lustful.png'},
+                    {head: 'resources/adult.png',	choice_1: 'resources/helpful.png',	choice_2: 'resources/teen.png'},
+                    {head: 'resources/cautious.png',	choice_1: 'resources/apathy.png',	choice_2: 'resources/subservient.png'},
+                    {head: 'resources/confident.png',	choice_1: 'resources/dishonesty.png',	choice_2: 'resources/firm.png'},
+                    {head: 'resources/distrustful.png',	choice_1: 'resources/toddler.png',	choice_2: 'resources/nephew.png'},
+                    {head: 'resources/gent.png',	choice_1: 'resources/senior.png',	choice_2: 'resources/aggressive.png'},
+                    {head: 'resources/granny.png',	choice_1: 'resources/woman.png',	choice_2: 'resources/restless.png'},
+                    {head: 'resources/talkative.png',	choice_1: 'resources/inhibited.png',	choice_2: 'resources/humble.png'},
+                    {head: 'resources/coarse.png',	choice_1: 'resources/boy.png',	choice_2: 'resources/stern.png'},
+                    {head: 'resources/distrustful.png',	choice_1: 'resources/patience.png',	choice_2: 'resources/cynical.png'},
+                    {head: 'resources/considerate.png',	choice_1: 'resources/sad.png',	choice_2: 'resources/nephew.png'},
+                    {head: 'resources/communicative.png',	choice_1: 'resources/selfish.png',	choice_2: 'resources/quarrelsome.png'},
+                    {head: 'resources/considerate.png',	choice_1: 'resources/idealistic.png',	choice_2: 'resources/communicative.png'},
+                    {head: 'resources/aggressive.png',	choice_1: 'resources/mother.png',	choice_2: 'resources/tough.png'},
+                    {head: 'resources/miserly.png',	choice_1: 'resources/intellectual.png',	choice_2: 'resources/harsh.png'},
+                    {head: 'resources/smart.png',	choice_1: 'resources/confronted.png',	choice_2: 'resources/honesty.png'},
+                    {head: 'resources/cruelty.png',	choice_1: 'resources/greed.png',	choice_2: 'resources/dishonesty.png'},
+                    {head: 'resources/nervous.png',	choice_1: 'resources/angry.png',	choice_2: 'resources/intelligence.png'},
+                    {head: 'resources/toddler.png',	choice_1: 'resources/greed.png',	choice_2: 'resources/harsh.png'},
+                    {head: 'resources/unintelligent.png',	choice_1: 'resources/extravagance.png',	choice_2: 'resources/smart.png'}]
+
+    
+          
+    var check = [
+                {head: 'resources/sad.png',	choice_1: 'resources/generous.png',	choice_2: 'resources/sad.png', correct_choice: 1},
+                {head: 'resources/mature.png',	choice_1: 'resources/mature.png',	choice_2: 'resources/extravagance.png', correct_choice: 0},
+                {head: 'resources/daring.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/daring.png', correct_choice: 1},
+                {head: 'resources/angry.png',	choice_1: 'resources/truthful.png',	choice_2: 'resources/angry.png', correct_choice: 1},
+                {head: 'resources/niece.png',	choice_1: 'resources/niece.png',	choice_2: 'resources/enterprising.png', correct_choice: 0},
+                {head: 'resources/rebellious.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/lustful.png', correct_choice: 0},
+                {head: 'resources/adult.png',	choice_1: 'resources/helpful.png',	choice_2: 'resources/adult.png', correct_choice: 1},
+                {head: 'resources/baby.png',	choice_1: 'resources/eager.png',	choice_2: 'resources/baby.png', correct_choice: 1},
+                {head: 'resources/lazy.png',	choice_1: 'resources/lazy.png',	choice_2: 'resources/rigid.png', correct_choice: 0},
+                {head: 'resources/bossy.png',	choice_1: 'resources/bossy.png',	choice_2: 'resources/lustful.png', correct_choice: 0},
+                {head: 'resources/dad.png',	choice_1: 'resources/groom.png',	choice_2: 'resources/dad.png', correct_choice: 1}
+    ]
+    
+    
+   //to shuffle the array of button choices at the beginning of the experiment   
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+        
+    var test_stimuli = [];
+    
+    // to get a random item from the array
+    function getRandomItems(arr) {
+        var temp_array = jsPsych.randomization.sampleWithoutReplacement(arr, 2);
+          arr = arr.filter(e => e !== temp_array[0]);
+          arr = arr.filter(e => e !== temp_array[1]);
+        return temp_array;
+    }
+      
+      
+    /* define welcome message trial */
+    var welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Welcome to the experiment. Press any key to begin."
+    };
+    timeline.push(welcome);
+      
+      
+    timeline.push({
+      type: jsPsychFullscreen,
+      fullscreen_mode: true
+    });    
+         
+    /* define consent trail */
+    var consent = {
+        type: jsPsychImageButtonResponse,
+        stimulus: "kc_lab_consent_prolific.png", // CHANGE THIS (to Mturk/Prolific or SONA depending on your sample)
+        choices: ["Consent & Continue"]
+    };
+    timeline.push(consent);
+      
+    var lasttrialdata_rt = 0;
+          
+    /* define testing instructions */
+    var instructions = {
+      type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
+      stimulus: "<p>In each trial of this task, you will see three images: one target item on top, and two choices beneath the target item." +
+        "</p><p>For each trial, <strong>please select the item that is most like the target item.</strong>"+
+        "<p>There may be trials with no obvious answer. In those cases, use your best judgement." +
+        "<p>There will be 2 rounds of this task with around 250 trials per round. You will have the opportunity to take a break midway. </p>"+
+          "<p>Click 'Continue' to begin the test.</p>",
+        choices: ["Continue"],
+        post_trial_gap: 2000,
+        on_finish: function(){
+            shuffle(validation);
+
+        }
+    };
+   timeline.push(instructions);  
+      
+      
+      var fixation = {
+          type: jsPsychHtmlKeyboardResponse,
+            stimulus: '+',
+            choices: "NO_KEYS",
+            trial_duration: 500
+        };
+      timeline.push(fixation);
+      
+      var arr_pair = [];
+
+// define the trials!
+      
+      var trial = {
+          type: jsPsychImageButtonResponse,
+            stimulus: jsPsych.timelineVariable('item'),    // IF YOU CHANGED THE OBJECT NAMES IN YOUR ARRAY ABOVE, CHANGE THEM HERE TO MATCH     
+            choices: function(){
+                shuffle(stimuli_arr);
+                arr_pair = getRandomItems(stimuli_arr);
+                // the following makes sure the choices and stimulus are NOT the same!
+                while(arr_pair[0] == jsPsych.timelineVariable('item') || arr_pair[1] == jsPsych.timelineVariable('item')){
+                    arr_pair = getRandomItems(stimuli_arr);
+                }
+                return arr_pair;
+            },
+            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+            on_finish: function(data){
+                shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFICIED ABOVE
+                data.choices = arr_pair;
+                n = 1;
+                var data_last1 = jsPsych.data.get().last(n);
+                lasttrialdata_rt = data_last1.select('rt').mean();
+                if (lasttrialdata_rt < 900){
+                      data.speedy = true;
+                    } else {
+                      data.speedy = false; 
+                }
+                data.sampleAlg = "random";
+            }
+      };
+      
+      
+      
+      
+      // define the validation trials!
+      var validation_trial = {
+          type: jsPsychImageButtonResponse,
+            stimulus: function(){
+                row = validation.pop();
+                head = row.head;
+                return head;},         
+            choices: function(){
+                arr_pair = [row.choice_1, row.choice_2];
+                return arr_pair;
+            },
+            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+          on_finish: function(data){
+              data.choices = arr_pair;
+              n = 1;
+                var data_last = jsPsych.data.get().last(n);
+                lasttrialdata_rt = data_last.select('rt').mean();
+                if (lasttrialdata_rt < 1000){
+                      data.speedy = true;
+                    } else {
+                      data.speedy = false; 
+                }
+              data.sampleAlg = "validation"
+          }
+      };
+
+      // define the attention checks!
+      var check_trial = {
+          type: jsPsychImageButtonResponse,
+            stimulus: jsPsych.timelineVariable('head'),         
+            choices: function(){
+                arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
+                return arr_pair;
+            },
+            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+          on_finish: function(data){
+              data.choices = arr_pair;
+              if (data.response == jsPsych.timelineVariable('correct_choice')){
+                  data.correct = true;
+                } else {
+                  data.correct = false; 
+              }
+              data.sampleAlg = "check";
+          }
+      };
+    
+        
+        var if_trial_check = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: "<p><strong>Incorrect!</strong></p>That was an attention check. Please pay attention while completing this task.<p>Press 'y' to continue.</p>",
+            choices:["y"]
+        }
+
+        var if_node_check = {
+            timeline: [if_trial_check],
+            conditional_function: function(){
+                // get the data from the previous trial,
+                // and check which key was pressed
+                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                if(last_trial_correct){
+                    return false; // the parameter value has to be returned from the function
+                } else {
+                    return true; // the parameter value has to be returned from the function
+                }
+            }
+        }
+        
+        var if_trial_speed = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: "<p><strong>You're going too fast.</strong><p>Please slow down and assess each triplet." +
+                  "<p>Press 'y' to continue.</p></p>",
+            choices: ["y"]
+        }
+
+        var if_node_speed = {
+            timeline: [if_trial_speed],
+            conditional_function: function(){
+                // get the data from the previous trial,
+                // and check which key was pressed
+                var last_trial_speed = jsPsych.data.get().last(1).values()[0].speedy;
+                if(last_trial_speed){
+                    return true; // the parameter value has to be returned from the function;
+                } else{
+                    return false;
+                }
+            }
+        }
+    
+       
+    // okay so this is to get a random set of elements...  
+    function getRandom(arr, n) {
+        var result = new Array(n),
+            len = arr.length,
+            taken = new Array(len);
+        if (n > len)
+            throw new RangeError("getRandom: more elements taken than available");
+        while (n--) {
+            var x = Math.floor(Math.random() * len);
+            result[n] = arr[x in taken ? taken[x] : x];
+            taken[x] = --len in taken ? taken[len] : len;
+        }
+        return result;
+    }
+      
+    
+var validation_procedure = {
+    timeline: [fixation, validation_trial, if_node_speed],
+    timeline_variables: validation,
+    prompt: "Select the item closest to the item on top",
+    sample :{
+        type: 'without-replacement',
+        size: 5 // CHANGE THIS if you want a different number of validation trials per block
+    }
+};
+      
+var trial_procedure = {
+    timeline: [fixation, trial, if_node_speed],
+    timeline_variables: stimuli,
+    prompt: "Select the item closest to the item on top",
+    randomize_order: true,
+    sample: {
+        type: 'with-replacement',
+        size: 20 // CHANGE THIS if you want a different number of regular trials per block
+    }
+};
+          
+      
+var check_procedure = {
+    timeline: [fixation, check_trial, if_node_check],
+    timeline_variables: check,
+    prompt: "Select the item closest to the item on top",
+    sample: {
+        type: 'without-replacement',
+        size: 1 // CHANGE THIS if you want a different number of check trials per block
+    }
+};
+      
+    
+      
+var procedure = {
+    timeline: [trial_procedure, check_procedure, validation_procedure],
+    randomize_order: true,
+    repetitions: 5
+};
+      
+      
+      // total number of social trials = (20*5) + (5*5) + (1*5) 130 trials *2 = 260
+      
+    var quick_break = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
+        "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
+        choices: ["Continue"]
+    };
+      
+
+      timeline.push(procedure);
+      timeline.push(quick_break);
+      timeline.push(procedure);
+ 
+         
+    
+var demographic_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: "<p>Thank you.<p>For this last part of the experiment, please provide us with information about yourself.</p> ",
+      choices: ["Continue"],
+      post_trial_gap: 1000
+    };
+timeline.push(demographic_instructions);
+      
+      
+var demographics = {
+    type: jsPsychSurveyMultiSelect,
+    questions: [
+      {prompt: "Which categories describe you? Select all that apply to you:", 
+        options: ["American Indian or Alaska Native - For example, Navajo Nation, Mayan", 
+                  "Asian - For example, Chinese, Asian Indian",
+                  "Black or African American - For example, Jamaican, Ethiopian",
+                  "Hispanic or Latino - For example, Mexican or Mexican American, Puerto Rican, Salvadoran",
+                 "Middle Eastern or North African - For example, Lebanese, Iranian, Moroccan",
+                 "Native Hawaiian or Other Pacific Islander - For example, Somoan, Fijian",
+                 "White - For example, German, Irish",
+                 "Some other race, ethnicity, or origin",
+                 "I prefer not to answer"], 
+        horizontal: false,
+        required: true,
+        name: 'race_eth'}
+    ]};
+    timeline.push(demographics);  
+
+    
+    var id_age = {
+      type: jsPsychSurveyText,     // CHANGE THIS (written survey questions)
+      questions: [{prompt: "Please enter your age (in years):", rows: 1, columns: 6, name: "age", required: true}, 
+                  {prompt: "How do you currently describe your gender identity? Please specify.", rows: 1, columns: 60, name: "gender"},
+                  {prompt: "What country do you live in?", rows : 1, columns: 40, name: "country"}
+                 ]
+    };
+    timeline.push(id_age);
+      
+      
+      
+   var goodbye = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: function(){
+        output = "Great job! You have finished the experiment. <br> <strong> Here is your secret code: CZEQ6EOV </strong><br> Goodbye!<br><br>";
+      return output;
+      },
+      choices: ["<a href='https://app.prolific.com/submissions/complete?cc=CZEQ6EOV'>Complete Experiment</a>"]    
+   };
+    
+    timeline.push(save_data);
+    timeline.push(goodbye);
+
+      
+//     // this is to save to normal server
+//    function saveData(name, data){
+//      var xhr = new XMLHttpRequest();
+//      xhr.open('POST', 'data_write.php'); // 'write_data.php' is the path to the php file described above.
+//      xhr.setRequestHeader('Content-Type', 'application/json');
+//      xhr.send(JSON.stringify({filename: name, filedata: data}));
+//    }
+    
+
+      
+    jsPsych.run(timeline);
+
+
+  </script>
+  </html>
+
+<!--
+
+-->
