@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>What is "social"?</title>  <!-- CHANGE THIS (title) -->
+    <title>Color triplets</title>  <!-- CHANGE THIS (title) -->
       
     <script src="https://unpkg.com/jspsych@7.3.4"></script>
     <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
@@ -61,6 +61,8 @@
       
     // THIS IS CLEM'S CODE
     // read in files from img folder and print to console
+    var fs = require('fs');
+    //var files = fs.readdirSync('/assets/photos/');
     var files = fs.readdirSync('/img/');
     console.log(files)
     
