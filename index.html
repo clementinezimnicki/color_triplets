@@ -44,10 +44,11 @@
   var filename = "triplets_social_words_" + secret_code + ".csv"; // CHANGE THIS (file name)
 
     // this is to save to OSF using DataPipe
-      const save_data = {
+    //if want to save data more often, copy this and change the name, and save halfway through
+      const save_data = { 
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "OWSfXyJtv9w5",
+        experiment_id: "W31dcwJTrTgj", //change this for different experiments in datapipe
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
       };
@@ -56,8 +57,12 @@
     var timeline = [];
       
     // pulling info re: mechanical turk hit
-      var urlvar = jsPsych.data.urlVariables();  
+    var urlvar = jsPsych.data.urlVariables();  
       
+    // THIS IS CLEM'S CODE
+    // read in files from img folder and print to console
+    var files = fs.readdirSync('/img/');
+    console.log(files)
     
     var preload = {
         type: jsPsychPreload,
@@ -586,6 +591,7 @@
       //1) make a pool of random triplets
       //2) sample
     var validation = [
+      // head is the one on top; choice 1 on Left choice 2 on Right
                     {head: 'resources/sociable.png',	choice_1: 'resources/intellectual.png',	choice_2: 'resources/helpless.png'},
                     {head: 'resources/distaste.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/flexible.png'},
                     {head: 'resources/lively.png',	choice_1: 'resources/restless.png',	choice_2: 'resources/greed.png'},
@@ -868,7 +874,9 @@
         return result;
     }
       
-    
+// block/chunk of 5 validation trials
+// eg 25 random trials, 5 validation trials, then a random trial 
+// so that you know what is happening in each portion of the experiment
 var validation_procedure = {
     timeline: [fixation, validation_trial, if_node_speed],
     timeline_variables: validation,
@@ -902,7 +910,7 @@ var check_procedure = {
 };
       
     
-      
+// total: 26 trials * 5
 var procedure = {
     timeline: [trial_procedure, check_procedure, validation_procedure],
     randomize_order: true,
@@ -919,7 +927,7 @@ var procedure = {
         choices: ["Continue"]
     };
       
-
+// run the procedure twice with a break in between
       timeline.push(procedure);
       timeline.push(quick_break);
       timeline.push(procedure);
@@ -969,6 +977,7 @@ var demographics = {
    var goodbye = {
       type: jsPsychHtmlButtonResponse,
       stimulus: function(){
+        // the secret code changes for different experiments on Prolific
         output = "Great job! You have finished the experiment. <br> <strong> Here is your secret code: C18AM5PA </strong><br> Goodbye!<br><br>";
       return output;
       },
