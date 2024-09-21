@@ -19,6 +19,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.0"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+    <script src ="colorNames.json"></script>
       
       
   </head>
@@ -59,17 +60,16 @@
     // pulling info re: mechanical turk hit
     var urlvar = jsPsych.data.urlVariables();  
       
-    // THIS IS CLEM'S CODE
-    // read in files from img folder and print to console
-    var fs = require('fs');
-    //var files = fs.readdirSync('/assets/photos/');
-    var files = fs.readdirSync('/img/');
-    console.log(files)
+    console.log(colorNames)
+    console.log(colorHex)
     
+
     var preload = {
         type: jsPsychPreload,
         auto_preload: true,
-        images: [
+        images: colorHex,
+        /*[
+          
                 'resources/adolescent.png',
                 'resources/adult.png',
                 'resources/affectionate.png',
@@ -237,7 +237,8 @@
                 'resources/wise.png',
                 'resources/woman.png',
                 'resources/youth.png'
-               ],
+                
+               ],*/
         show_progress_bar: true,
         message: "Loading experiment files...",
         error_message: "Oops! There's a problem loading files. Please refresh the page to try again."
