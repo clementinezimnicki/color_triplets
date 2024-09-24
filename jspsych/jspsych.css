@@ -371,7 +371,7 @@
 
 .jspsych-btn {
   display: inline-block;
-  padding: 8px 12px;
+  padding: 0px 0px; /* 8 px 12 px*/
   margin: 0.75em;
   font-size: 14px;
   font-weight: 400;
