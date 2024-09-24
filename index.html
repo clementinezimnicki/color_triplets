@@ -3,22 +3,21 @@
   <head>
     <title>Color triplets</title>  <!-- CHANGE THIS (title) -->
       
-    <script src="https://unpkg.com/jspsych@7.3.4"></script>
-    <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
-      
-    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-audio-button-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-audio-keyboard-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.0"></script>
+    <script src="src/index.scss" rel="stylesheet" type="text/css"></script>
+    <script src="src/JsPsych.ts"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+    <script src="jspsych/plugin-image-button-response.js"></script>
+    <script src="jspsych/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych/plugin-image-keyboard-response.js"></script>
+    <script src="jspsych/plugin-fullscreen.js"></script>
+    <script src="jspsych/plugin-audio-button-response.js"></script>
+    <script src="jspsych/plugin-image-keyboard-response.js"></script>
+    <script src="jspsych/plugin-survey-multi-select.js"></script>
+    <script src="jspsych/plugin-survey-text.js"></script>
+    <script src="jspsych/plugin-survey-likert.js"></script>
+    <script src="jspsych/plugin-call-function.js"></script>
+    <script src="jspsych/plugin-plugin-preload.js"></script>
+    <script src="jspsych/plugin-image-button-response.js"></script>
     <script src ="colorNames.json"></script>
       
       
@@ -26,7 +25,7 @@
   <body></body>
     
   <script>
-
+//<script src="https://unpkg.com/jspsych@7.3.4">
     var jsPsych = initJsPsych({
         show_progress_bar:false,
         on_data_update: function(){
@@ -433,12 +432,148 @@ var procedure = {
         choices: ["Continue"]
     };
       
-// run the procedure twice with a break in between
+  // run the procedure twice with a break in between
       timeline.push(procedure);
       timeline.push(quick_break);
       timeline.push(procedure);
+
+  //-----------------------------------------end ishihara-----------------------------------------
+
+      // Ishihara color vision check //
+  var ishihara_instructions = {
+    type: "html-keyboard-response",
+        stimulus: 
+        "<p>Next, you will see an image on the screen." +
+        "<br>If you see a number in the image, please type that number in the box.</p>"+
+        "<p>If you do not see a number in the image, please type 'None' in the box."+
+        "<br>This part of the experiment will take about 1 minute.</p>"+
+        "<p>Please press the spacebar to begin.</p>",
+        post_trial_gap: 500,
+        choices: [32]
+    };
+    timeline.push(ishihara_instructions);
+
+
+    //random function
+    function getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return  Math.floor(Math.random() * (max - min + 1));
+        }
+    //
+
+   //Loop to present 6 ishihara plates of a unique type
+   var plateCounter = [0,0,0,0,0,0]
+   var numPlates = 6; 
+   for (plateNum = 0; plateNum < numPlates;){
+
+        //Randomly select which plate for a given type
+        var plate = getRandomIntInclusive(0,5);
+
+        //always present this plate first
+        if (plateNum == 0){
+                plate = 0; 
+                whichPlate = 0;
+                answer  =  JSON.stringify({"ishihara":"12"});
+        }
+
+        //present the other 5 in a random order
+        if (plate == 1 | plate == 3 | plate == 5){
+                whichPlate = getRandomIntInclusive(0,1);
+               if (plate == 1 & whichPlate == 0){
+                    answer = JSON.stringify({"ishihara":"8"});
+                }else if (plate == 1 & whichPlate == 1){
+                    answer = JSON.stringify({"ishihara":"29"}); 
+                }else if (plate == 3 & whichPlate == 0){
+                    answer = JSON.stringify({"ishihara":"6"}); 
+                }else if (plate == 3 & whichPlate == 1){
+                    answer = JSON.stringify({"ishihara":"45"});
+                }else if (plate == 5 & whichPlate == 0){
+                    answer = JSON.stringify({"ishihara":"26"}); 
+                }else if (plate == 5 & whichPlate == 1){
+                    answer = JSON.stringify({"ishihara":"42"});  
+                 }
+            }else if (plate == 2 | plate == 4){
+                whichPlate = getRandomIntInclusive(0,3);
+                if (plate == 2 & whichPlate == 0){
+                    answer = JSON.stringify({"ishihara":"5"}); 
+                }else if (plate == 2 & whichPlate == 1){
+                    answer = JSON.stringify({"ishihara":"3"}); 
+                }else if (plate == 2 & whichPlate == 2){
+                    answer = JSON.stringify({"ishihara":"15"});
+                }else if (plate == 2 & whichPlate == 3){
+                    answer = JSON.stringify({"ishihara":"74"}); 
+                }else if (plate == 4 & whichPlate == 0){
+                    answer = JSON.stringify({"ishihara":"5"}); 
+                }else if (plate == 4 & whichPlate == 1){
+                    answer = JSON.stringify({"ishihara":"7"}); 
+                }else if (plate == 4 & whichPlate == 2){
+                    answer = JSON.stringify({"ishihara":"16"}); 
+                }else if (plate == 4 & whichPlate == 3){
+                    answer = JSON.stringify({"ishihara":"73"}); 
+                }
+        }
+        //Check to ensure this plate not previously presented
+        if (plateCounter[plate] == 0) {
+
+            //Present trial
+            var ishihara_plate = {
+                type: 'image-text-responseMAS',
+                stimulus: "ishiharaPlateImg/IshiharaPlates-"+plate+"-"+whichPlate+".png", 
+                stimulus_height: 400, 
+                correctAnswer: answer,
+                on_start: function(trial) {
+                    correctAnswer = trial.correctAnswer}, //recorded in the "prompt" column of the output
+                questions: [
+                    { prompt: "Type what number you see. "+
+                        "<p>If you do not see a number, type 'None'.",
+                    rows: 1, 
+                    columns: 1,
+                    required: true,
+                    name: 'ishihara'}],
+                    button_label: "Next",
+                    on_finish: function(data){
+                            if(data.responses == correctAnswer){
+                                data.correct = 1;  //correct
+                            } else {
+                                data.correct = 0;}} //incorrect
+                    }         
+            timeline.push(ishihara_plate) 
+            plateCounter[plate] = 1; 
+            plateNum++
+        }
+    }
+
+
+    // Color Vision check //
+    var colorvision = {
+        type: 'survey-multi-choice',
+        questions: [
+            {prompt: "Do you have difficulty seeing colors or noticing differences<br>between colors compared to the average person?",
+            options: ["Yes", "No"],
+            horizontal: false,
+            required: true, 
+            name: 'colorDifficulty'},
+
+            {prompt: "Do you consider yourself to be colorblind? ",
+            options: ["Yes", "No"],
+            horizontal: false,
+            required: true, 
+            name: 'colorBlind'},
+
+            {prompt: "What device did you use to complete this experiment?",
+            options: ["Computer", "Tablet", "Phone", "Other"],
+            horizontal: false,
+            required: true, 
+            name: 'device'}
+        ],
+        preamble: "",
+        button_label: "Done",
+        randomize_question_order: false,
+        }; 
+    timeline.push(colorvision); 
  
-         
+    //-----------------------------------------end ishihara-----------------------------------------
     
 var demographic_instructions = {
       type: jsPsychHtmlButtonResponse,
