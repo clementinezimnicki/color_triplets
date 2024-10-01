@@ -380,8 +380,9 @@
 /* only apply the hover style on devices with a mouse/pointer that can hover - issue #977 */
 @media (hover: hover) {
   .jspsych-btn:hover {
-    background-color: #ddd;
-    border-color: #aaa;
+    background-color: Transparent;
+    border-color: Transparent;
+    outline: none;
   }
 }
 .jspsych-btn:active {
