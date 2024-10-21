@@ -142,8 +142,9 @@
     ]
     
 
+    //concatenate the random (25) validation trials with the chosen (32) validation trials, for a total of 57
     validation_concat = validationTrials.concat(validation);
-    console.log(validation_concat)
+    //console.log(validation_concat)
     
    //to shuffle the array of button choices at the beginning of the experiment   
     function shuffle(array) {
@@ -205,7 +206,7 @@
         choices: ["Continue"],
         post_trial_gap: 2000,
         on_finish: function(){
-            shuffle(validation);
+            shuffle(validation_concat);
 
         }
     };
@@ -259,7 +260,7 @@
       var validation_trial = {
           type: jsPsychImageButtonResponse,
             stimulus: function(){
-                row = validation.pop();
+                row = validation_concat.pop(); //was just validation
                 head = row.head;
                 return head;},         
             choices: function(){
@@ -364,7 +365,7 @@
 // so that you know what is happening in each portion of the experiment
 var validation_procedure = {
     timeline: [fixation, validation_trial, if_node_speed],
-    timeline_variables: validation,
+    timeline_variables: validation_concat, //changed from just validation
     prompt: "Select the item most similar to the item on top",
     sample :{
         type: 'without-replacement',
