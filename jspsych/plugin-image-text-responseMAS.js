@@ -11,7 +11,7 @@
 
  var jsPsychImageTextResponseMAS = (function (jspsych) {
 
-  var plugin = {};
+  //var plugin = {};
 
   //jsPsych.pluginAPI.registerPreload('image-text-responseMAS', 'stimulus', 'image');
 
