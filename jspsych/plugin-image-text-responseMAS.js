@@ -15,7 +15,7 @@
 
   //jsPsych.pluginAPI.registerPreload('image-text-responseMAS', 'stimulus', 'image');
 
-  plugin.info = {
+const info = {
     name: 'image-text-responseMAS',
     description: '',
     parameters: {
