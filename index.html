@@ -500,7 +500,7 @@ var procedure = {
 
             //Present trial
             var ishihara_plate = {
-                type: JsPsychImageTextResponseMAS,
+                type: jsPsychImageTextResponseMAS,
                 stimulus: "ishiharaPlateImg/IshiharaPlates-"+plate+"-"+whichPlate+".png", 
                 stimulus_height: 400, 
                 correctAnswer: answer,
@@ -529,7 +529,7 @@ var procedure = {
 
     // Color Vision check //
     var colorvision = {
-        type: JsPsychSurveyMultiSelect,
+        type: jsPsychSurveyMultiSelect,
         questions: [
             {prompt: "Do you have difficulty seeing colors or noticing differences<br>between colors compared to the average person?",
             options: ["Yes", "No"],

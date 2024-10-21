@@ -9,7 +9,7 @@
  **/
 
 
- var JsPsychImageTextResponseMAS = (function (jspsych) {
+ var jsPsychImageTextResponseMAS = (function (jspsych) {
 
   //var plugin = {};
 
