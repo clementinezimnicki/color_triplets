@@ -422,7 +422,7 @@ var procedure = {
 
       // Ishihara color vision check //
   var ishihara_instructions = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlButtonResponse,
         stimulus: 
         "<p>Next, you will see an image on the screen." +
         "<br>If you see a number in the image, please type that number in the box.</p>"+
@@ -499,7 +499,7 @@ var procedure = {
 
             //Present trial
             var ishihara_plate = {
-                type: 'image-text-responseMAS',
+                type: JsPsychImageTextResponseMAS,
                 stimulus: "ishiharaPlateImg/IshiharaPlates-"+plate+"-"+whichPlate+".png", 
                 stimulus_height: 400, 
                 correctAnswer: answer,
@@ -528,7 +528,7 @@ var procedure = {
 
     // Color Vision check //
     var colorvision = {
-        type: 'survey-multi-choice',
+        type: jsPsychSurveyMultiSelect,
         questions: [
             {prompt: "Do you have difficulty seeing colors or noticing differences<br>between colors compared to the average person?",
             options: ["Yes", "No"],
