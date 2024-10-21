@@ -47,7 +47,7 @@ const info = {
         type: jspsych.ParameterType.KEYCODE,
         array: true,
         pretty_name: 'Choices',
-        default: jsPsych.ALL_KEYS,
+        default: "ALL_KEYS",
         description: 'The keys the subject is allowed to press to respond to the stimulus.'
       },
       labels: {
