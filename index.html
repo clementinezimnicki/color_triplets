@@ -17,6 +17,7 @@
     <script src="jspsych/plugin-preload.js"></script>
     <script src="jspsych/plugin-image-button-response.js"></script>
     <script src ="colorNames.json"></script>
+    <script src ="validation_random.json"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
     
@@ -43,7 +44,7 @@
     
     // generating a user id and file name  
     var secret_code  = jsPsych.randomization.randomID(8);
-    var filename = "triplets_social_words_" + secret_code + ".csv"; // CHANGE THIS (file name)
+    var filename = "triplets_colors_" + secret_code + ".csv"; // CHANGE THIS (file name)
 
     // this is to save to OSF using DataPipe
     //if want to save data more often, copy this and change the name, and save halfway through
@@ -62,7 +63,7 @@
     var urlvar = jsPsych.data.urlVariables();  
       
     //console.log(colorNames)
-    console.log(colorHex)
+    //console.log(colorHex)
 
     // preload stimuli
     var preload = {
@@ -83,88 +84,66 @@
             {item: colorHex[i]},
         )
     }
-    
-    console.log(stimuli)
-        
-        
 
-      var stimuli_arr = colorHex
-      
-     
-      
+    var stimuli_arr = colorHex
       //plan: 
       //1) make a pool of random triplets
       //2) sample
     var validation = [
       //this is a list of ones you want to keep in
       // head is the one on top; choice 1 on Left choice 2 on Right
-                    {head: 'resources/sociable.png',	choice_1: 'resources/intellectual.png',	choice_2: 'resources/helpless.png'},
-                    {head: 'resources/distaste.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/flexible.png'},
-                    {head: 'resources/lively.png',	choice_1: 'resources/restless.png',	choice_2: 'resources/greed.png'},
-                    {head: 'resources/pensioner.png',	choice_1: 'resources/boy.png',	choice_2: 'resources/gent.png'},
-                    {head: 'resources/considerate.png',	choice_1: 'resources/granny.png',	choice_2: 'resources/juvenile.png'},
-                    {head: 'resources/passion.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/nervous.png'},
-                    {head: 'resources/careful.png',	choice_1: 'resources/unstable.png',	choice_2: 'resources/cowardly.png'},
-                    {head: 'resources/father.png',	choice_1: 'resources/emotional.png',	choice_2: 'resources/youth.png'},
-                    {head: 'resources/debutante.png',	choice_1: 'resources/inhibited.png',	choice_2: 'resources/sociable.png'},
-                    {head: 'resources/trustful.png',	choice_1: 'resources/playful.png',	choice_2: 'resources/intolerant.png'},
-                    {head: 'resources/unambitious.png',	choice_1: 'resources/aunt.png',	choice_2: 'resources/infant.png'},
-                    {head: 'resources/unkind.png',	choice_1: 'resources/niece.png',	choice_2: 'resources/critical.png'},
-                    {head: 'resources/adolescent.png',	choice_1: 'resources/subservient.png',	choice_2: 'resources/debutante.png'},
-                    {head: 'resources/cruelty.png',	choice_1: 'resources/talkative.png',	choice_2: 'resources/uneasy.png'},
-                    {head: 'resources/elder.png',	choice_1: 'resources/prideless.png',	choice_2: 'resources/mature.png'},
-                    {head: 'resources/resentful.png',	choice_1: 'resources/emotional.png',	choice_2: 'resources/reasonable.png'},
-                    {head: 'resources/enterprising.png',	choice_1: 'resources/calm.png',	choice_2: 'resources/indiscretion.png'},
-                    {head: 'resources/moral.png',	choice_1: 'resources/empathic.png',	choice_2: 'resources/stingy.png'},
-                    {head: 'resources/firm.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/greed.png'},
-                    {head: 'resources/truthful.png',	choice_1: 'resources/appalled.png',	choice_2: 'resources/firm.png'},
-                    {head: 'resources/unstable.png',	choice_1: 'resources/dishonesty.png',	choice_2: 'resources/subdued.png'},
-                    {head: 'resources/suspicious.png',	choice_1: 'resources/cheerful.png',	choice_2: 'resources/prideless.png'},
-                    {head: 'resources/idealistic.png',	choice_1: 'resources/sociable.png',	choice_2: 'resources/nostalgic.png'},
-                    {head: 'resources/adult.png',	choice_1: 'resources/communicative.png',	choice_2: 'resources/niece.png'},
-                    {head: 'resources/debutante.png',	choice_1: 'resources/miserly.png',	choice_2: 'resources/intolerant.png'},
-                    {head: 'resources/decisive.png',	choice_1: 'resources/generous.png',	choice_2: 'resources/sad.png'},
-                    {head: 'resources/confronted.png',	choice_1: 'resources/mature.png',	choice_2: 'resources/extravagance.png'},
-                    {head: 'resources/daring.png',	choice_1: 'resources/eccentricity.png',	choice_2: 'resources/impatience.png'},
-                    {head: 'resources/angry.png',	choice_1: 'resources/truthful.png',	choice_2: 'resources/dishonesty.png'},
-                    {head: 'resources/disagreeable.png',	choice_1: 'resources/niece.png',	choice_2: 'resources/enterprising.png'},
-                    {head: 'resources/extravagance.png',	choice_1: 'resources/rebellious.png',	choice_2: 'resources/lustful.png'},
-                    {head: 'resources/adult.png',	choice_1: 'resources/helpful.png',	choice_2: 'resources/teen.png'},
-                    {head: 'resources/cautious.png',	choice_1: 'resources/apathy.png',	choice_2: 'resources/subservient.png'},
-                    {head: 'resources/confident.png',	choice_1: 'resources/dishonesty.png',	choice_2: 'resources/firm.png'},
-                    {head: 'resources/distrustful.png',	choice_1: 'resources/toddler.png',	choice_2: 'resources/nephew.png'},
-                    {head: 'resources/gent.png',	choice_1: 'resources/senior.png',	choice_2: 'resources/aggressive.png'},
-                    {head: 'resources/granny.png',	choice_1: 'resources/woman.png',	choice_2: 'resources/restless.png'},
-                    {head: 'resources/talkative.png',	choice_1: 'resources/inhibited.png',	choice_2: 'resources/humble.png'},
-                    {head: 'resources/coarse.png',	choice_1: 'resources/boy.png',	choice_2: 'resources/stern.png'},
-                    {head: 'resources/distrustful.png',	choice_1: 'resources/patience.png',	choice_2: 'resources/cynical.png'},
-                    {head: 'resources/considerate.png',	choice_1: 'resources/sad.png',	choice_2: 'resources/nephew.png'},
-                    {head: 'resources/communicative.png',	choice_1: 'resources/selfish.png',	choice_2: 'resources/quarrelsome.png'},
-                    {head: 'resources/considerate.png',	choice_1: 'resources/idealistic.png',	choice_2: 'resources/communicative.png'},
-                    {head: 'resources/aggressive.png',	choice_1: 'resources/mother.png',	choice_2: 'resources/tough.png'},
-                    {head: 'resources/miserly.png',	choice_1: 'resources/intellectual.png',	choice_2: 'resources/harsh.png'},
-                    {head: 'resources/smart.png',	choice_1: 'resources/confronted.png',	choice_2: 'resources/honesty.png'},
-                    {head: 'resources/cruelty.png',	choice_1: 'resources/greed.png',	choice_2: 'resources/dishonesty.png'},
-                    {head: 'resources/nervous.png',	choice_1: 'resources/angry.png',	choice_2: 'resources/intelligence.png'},
-                    {head: 'resources/toddler.png',	choice_1: 'resources/greed.png',	choice_2: 'resources/harsh.png'},
-                    {head: 'resources/unintelligent.png',	choice_1: 'resources/extravagance.png',	choice_2: 'resources/smart.png'}]
+                    {head: 'img/55824D.png',	choice_1: 'img/96C58C.png',	choice_2: 'img/3B8378.png'},
+                    {head: 'img/55824D.png',	choice_1: 'img/5E78A1.png',	choice_2: 'img/7EC6BA.png'},
+                    {head: 'img/55824D.png',	choice_1: 'img/96C58C.png',	choice_2: 'img/5E78A1.png'},
+                    {head: 'img/96C58C.png',	choice_1: 'img/7EC6BA.png',	choice_2: 'img/55824D.png'},
+                    {head: 'img/96C58C.png',	choice_1: 'img/55824D.png',	choice_2: 'img/A0BAE6.png'},
+                    {head: 'img/96C58C.png',	choice_1: 'img/A0BAE6.png',	choice_2: 'img/3B8378.png'},
+                    {head: 'img/5E78A1.png',	choice_1: 'img/A0BAE6.png',	choice_2: 'img/3B8378.png'},
+                    {head: 'img/5E78A1.png',	choice_1: 'img/55824D.png',	choice_2: 'img/7EC6BA.png'},
+                    {head: 'img/5E78A1.png',	choice_1: 'img/55824D.png',	choice_2: 'img/A0BAE6.png'},
+                    {head: 'img/A0BAE6.png',	choice_1: 'img/7EC6BA.png',	choice_2: 'img/5E78A1.png'},
+                    {head: 'img/A0BAE6.png',	choice_1: 'img/96C58C.png',	choice_2: 'img/3B8378.png'},
+                    {head: 'img/A0BAE6.png',	choice_1: 'img/5E78A1.png',	choice_2: 'img/96C58C.png'},
+                    {head: 'img/3B8378.png',	choice_1: 'img/7EC6BA.png',	choice_2: 'img/5E78A1.png'},
+                    {head: 'img/3B8378.png',	choice_1: 'img/55824D.png',	choice_2: 'img/7EC6BA.png'},
+                    {head: 'img/7EC6BA.png',	choice_1: 'img/A0BAE6.png',	choice_2: 'img/3B8378.png'},
+                    {head: 'img/7EC6BA.png',	choice_1: 'img/3B8378.png',	choice_2: 'img/96C58C.png'},
 
-    
-          
+                    {head: 'img/A06776.png',	choice_1: 'img/E6A8B7.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/A06776.png',	choice_1: 'img/83764C.png',	choice_2: 'img/F1A78A.png'},
+                    {head: 'img/A06776.png',	choice_1: 'img/83764C.png',	choice_2: 'img/E6A8B7.png'},
+                    {head: 'img/E6A8B7.png',	choice_1: 'img/A06776.png',	choice_2: 'img/F1A78A.png'},
+                    {head: 'img/E6A8B7.png',	choice_1: 'img/A06776.png',	choice_2: 'img/C7B88B.png'},
+                    {head: 'img/E6A8B7.png',	choice_1: 'img/C7B88B.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/83764C.png',	choice_1: 'img/C7B88B.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/83764C.png',	choice_1: 'img/A06776.png',	choice_2: 'img/F1A78A.png'},
+                    {head: 'img/83764C.png',	choice_1: 'img/A06776.png',	choice_2: 'img/C7B88B.png'},
+                    {head: 'img/C7B88B.png',	choice_1: 'img/F1A78A.png',	choice_2: 'img/83764C.png'},
+                    {head: 'img/C7B88B.png',	choice_1: 'img/E6A8B7.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/C7B88B.png',	choice_1: 'img/83764C.png',	choice_2: 'img/E6A8B7.png'},
+                    {head: 'img/F1A78A.png',	choice_1: 'img/C7B88B.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/F1A78A.png',	choice_1: 'img/E6A8B7.png',	choice_2: 'img/A8664B.png'},
+                    {head: 'img/A8664B.png',	choice_1: 'img/A06776.png',	choice_2: 'img/F1A78A.png'},
+                    {head: 'img/A8664B.png',	choice_1: 'img/F1A78A.png',	choice_2: 'img/83764C.png'}
+                ]
+
     var check = [ // colors list: R- O- Y-- G-- B- I- V--- Bl-- W- Pi- Gray--
-                {head: 'resources/000000.png',	choice_1: 'resources/73CF10.png',	choice_2: 'resources/000000.png', correct_choice: 1}, //compare black w light green
-                {head: 'resources/0E8A19.png',	choice_1: 'resources/0E8A19.png',	choice_2: 'resources/F7A75A.png', correct_choice: 0}, //compare green with muted orange
-                {head: 'resources/1C3D61.png',	choice_1: 'resources/EA1D1D.png',	choice_2: 'resources/1C3D61.png', correct_choice: 1}, // compare navy with red
-                {head: 'resources/2E3086.png',	choice_1: 'resources/B9B9B9.png',	choice_2: 'resources/2E3086.png', correct_choice: 1}, // compare lighter navy with light gray
-                {head: 'resources/E31B73.png',	choice_1: 'resources/E31B73.png',	choice_2: 'resources/000000.png', correct_choice: 0}, //compare fuchsia with black
-                {head: 'resources/E81A4B.png',	choice_1: 'resources/E81A4B.png',	choice_2: 'resources/FCDB42.png', correct_choice: 0}, // cocmpare red with yellow
-                {head: 'resources/CD26B7.png',	choice_1: 'resources/90689F.png',	choice_2: 'resources/CD26B7.png', correct_choice: 1}, // compare violet with muted purple
-                {head: 'resources/A553C8.png',	choice_1: 'resources/D5B811.png',	choice_2: 'resources/A553C8.png', correct_choice: 1}, //compare violet2 with gold
-                {head: 'resources/FFFFFF.png',	choice_1: 'resources/FFFFFF.png',	choice_2: 'resources/EDDCAD.png', correct_choice: 0}, // compare white with beige
-                {head: 'resources/A8664B.png',	choice_1: 'resources/A8664B.png',	choice_2: 'resources/DDDDDD.png', correct_choice: 0}, // compare brown with light gray
-                {head: 'resources/4DC7E8.png',	choice_1: 'resources/E6A8B7.png',	choice_2: 'resources/4DC7E8.png', correct_choice: 1} //compare light blue with muted pink
+                {head: 'img/000000.png',	choice_1: 'img/73CF10.png',	choice_2: 'img/000000.png', correct_choice: 1}, //compare black w light green
+                {head: 'img/0E8A19.png',	choice_1: 'img/0E8A19.png',	choice_2: 'img/F7A75A.png', correct_choice: 0}, //compare green with muted orange
+                {head: 'img/1C3D61.png',	choice_1: 'img/EA1D1D.png',	choice_2: 'img/1C3D61.png', correct_choice: 1}, // compare navy with red
+                {head: 'img/2E3086.png',	choice_1: 'img/B9B9B9.png',	choice_2: 'img/2E3086.png', correct_choice: 1}, // compare lighter navy with light gray
+                {head: 'img/E31B73.png',	choice_1: 'img/E31B73.png',	choice_2: 'img/000000.png', correct_choice: 0}, //compare fuchsia with black
+                {head: 'img/E81A4B.png',	choice_1: 'img/E81A4B.png',	choice_2: 'img/FCDB42.png', correct_choice: 0}, // cocmpare red with yellow
+                {head: 'img/CD26B7.png',	choice_1: 'img/90689F.png',	choice_2: 'img/CD26B7.png', correct_choice: 1}, // compare violet with muted purple
+                {head: 'img/A553C8.png',	choice_1: 'img/D5B811.png',	choice_2: 'img/A553C8.png', correct_choice: 1}, //compare violet2 with gold
+                {head: 'img/FFFFFF.png',	choice_1: 'img/FFFFFF.png',	choice_2: 'img/EDDCAD.png', correct_choice: 0}, // compare white with beige
+                {head: 'img/A8664B.png',	choice_1: 'img/A8664B.png',	choice_2: 'img/DDDDDD.png', correct_choice: 0}, // compare brown with light gray
+                {head: 'img/4DC7E8.png',	choice_1: 'img/E6A8B7.png',	choice_2: 'img/4DC7E8.png', correct_choice: 1} //compare light blue with muted pink
     ]
     
+
+    validation_concat = validationTrials.concat(validation);
+    console.log(validation_concat)
     
    //to shuffle the array of button choices at the beginning of the experiment   
     function shuffle(array) {
