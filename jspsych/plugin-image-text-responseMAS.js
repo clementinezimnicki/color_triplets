@@ -13,7 +13,7 @@ jsPsych.plugins["image-text-responseMAS"] = (function() {
 
   var plugin = {};
 
-  jsPsych.pluginAPI.registerPreload('image-text-responseMAS', 'stimulus', 'image');
+  //jsPsych.pluginAPI.registerPreload('image-text-responseMAS', 'stimulus', 'image');
 
   plugin.info = {
     name: 'image-text-responseMAS',
