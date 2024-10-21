@@ -267,7 +267,7 @@
                 arr_pair = [row.choice_1, row.choice_2];
                 return arr_pair;
             },
-            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+            button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
           on_finish: function(data){
               data.choices = arr_pair;
               n = 1;
@@ -290,7 +290,7 @@
                 arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
                 return arr_pair;
             },
-            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+            button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
           on_finish: function(data){
               data.choices = arr_pair;
               if (data.response == jsPsych.timelineVariable('correct_choice')){
