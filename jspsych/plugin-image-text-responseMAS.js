@@ -9,7 +9,7 @@
  **/
 
 
-jsPsych.plugins["image-text-responseMAS"] = (function() {
+ var jsPsychImageTextResponseMAS = (function (jspsych) {
 
   var plugin = {};
 
@@ -294,7 +294,7 @@ jsPsych.plugins["image-text-responseMAS"] = (function() {
       };
     
       return plugin;
-    })();
+    })(jsPsychModule);
  
 
   
