@@ -20,125 +20,125 @@ const info = {
     description: '',
     parameters: {
       stimulus: {
-        type: jsPsych.plugins.parameterType.IMAGE,
+        type: jspsych.ParameterType.IMAGE,
         pretty_name: 'Stimulus',
         default: undefined,
         description: 'The image to be displayed'
       },
       stimulus_height: {
-        type: jsPsych.plugins.parameterType.INT,
+        type: jspsych.ParameterType.INT,
         pretty_name: 'Image height',
         default: null,
         description: 'Set the image height in pixels'
       },
       stimulus_width: {
-        type: jsPsych.plugins.parameterType.INT,
+        type: jspsych.ParameterType.INT,
         pretty_name: 'Image width',
         default: null,
         description: 'Set the image width in pixels'
       },
       maintain_aspect_ratio: {
-        type: jsPsych.plugins.parameterType.BOOL,
+        type: jspsych.ParameterType.BOOL,
         pretty_name: 'Maintain aspect ratio',
         default: true,
         description: 'Maintain the aspect ratio after setting width or height'
       },
       choices: {
-        type: jsPsych.plugins.parameterType.KEYCODE,
+        type: jspsych.ParameterType.KEYCODE,
         array: true,
         pretty_name: 'Choices',
         default: jsPsych.ALL_KEYS,
         description: 'The keys the subject is allowed to press to respond to the stimulus.'
       },
       labels: {
-        type: jsPsych.plugins.parameterType.HTML_STRING,
+        type: jspsych.ParameterType.HTML_STRING,
         pretty_name:'Labels',
         default: [],
         array: true,
         description: 'Labels of image.',
       },
       prompt: {
-        type: jsPsych.plugins.parameterType.STRING,
+        type: jspsych.ParameterType.STRING,
         pretty_name: 'Prompt',
         default: null,
         description: 'Any content here will be displayed below the stimulus.'
       },
       prompt_location: {
-        type: jsPsych.plugins.parameterType.SELECT,
+        type: jspsych.ParameterType.SELECT,
         pretty_name: 'Prompt location',
         options: ['above','below'],
         default: 'above',
         description: 'Indicates whether to show prompt "above" or "below" the sorting area.'
       },
       stimulus_duration: {
-        type: jsPsych.plugins.parameterType.INT,
+        type: jspsych.ParameterType.INT,
         pretty_name: 'Stimulus duration',
         default: null,
         description: 'How long to hide the stimulus.'
       },
       trial_duration: {
-        type: jsPsych.plugins.parameterType.INT,
+        type: jspsych.ParameterType.INT,
         pretty_name: 'Trial duration',
         default: null,
         description: 'How long to show trial before it ends.'
       },
       response_ends_trial: {
-        type: jsPsych.plugins.parameterType.BOOL,
+        type: jspsych.ParameterType.BOOL,
         pretty_name: 'Response ends trial',
         default: true,
         description: 'If true, trial will end when subject makes a response.'
       },
       trial_type: {
-        type: jsPsych.plugins.parameterType.SELECT,
+        type: jspsych.ParameterType.SELECT,
         pretty_name: 'Part of trial',
         options: ['Present','TextFeed','MotionFeed'],
         default: 'Present',
         description: 'Which set of features to display.'
       },
       correctAnswer: {
-        type: jsPsych.plugins.parameterType.STRING,
+        type: jspsych.ParameterType.STRING,
         pretty_name: 'correct answer',
         default: null,
         description: 'correct answer for the given plate'
       },
       questions: {
-        type: jsPsych.plugins.parameterType.COMPLEX,
+        type: jspsych.ParameterType.COMPLEX,
         array: true,
         pretty_name: 'Questions',
         default: undefined,
         nested: {
           prompt: {
-            type: jsPsych.plugins.parameterType.STRING,
+            type: jspsych.ParameterType.STRING,
             pretty_name: 'Prompt',
             default: undefined,
             description: 'Prompt for the subject to response'
           },
           placeholder: {
-            type: jsPsych.plugins.parameterType.STRING,
+            type: jspsych.ParameterType.STRING,
             pretty_name: 'Value',
             default: "",
             description: 'Placeholder text in the textfield.'
           },
           rows: {
-            type: jsPsych.plugins.parameterType.INT,
+            type: jspsych.ParameterType.INT,
             pretty_name: 'Rows',
             default: 1,
             description: 'The number of rows for the response text box.'
           },
           columns: {
-            type: jsPsych.plugins.parameterType.INT,
+            type: jspsych.ParameterType.INT,
             pretty_name: 'Columns',
             default: 40,
             description: 'The number of columns for the response text box.'
           },
           required: {
-            type: jsPsych.plugins.parameterType.BOOL,
+            type: jspsych.ParameterType.BOOL,
             pretty_name: 'Required',
             default: false,
             description: 'Require a response'
           },
           name: {
-            type: jsPsych.plugins.parameterType.STRING,
+            type: jspsych.ParameterType.STRING,
             pretty_name: 'Question Name',
             default: '',
             description: 'Controls the name of data values associated with this question'
