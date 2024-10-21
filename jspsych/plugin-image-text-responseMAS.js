@@ -148,7 +148,11 @@ const info = {
     }
   }
 
-  plugin.trial = function(display_element, trial) {
+  class ImageTextResponseMASPlugin {
+    constructor(jsPsych) {
+        this.jsPsych = jsPsych;
+    }
+    trial(display_element, trial) {
 
 
   
@@ -292,8 +296,10 @@ const info = {
     
         var startTime = performance.now();
       };
-    
-      return plugin;
+    }
+      ImageTextResponseMASPlugin.info = info;
+
+      return ImageTextResponseMASPlugin;
     })(jsPsychModule);
  
 
