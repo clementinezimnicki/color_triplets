@@ -195,6 +195,23 @@
     timeline.push(consent);
       
     var lasttrialdata_rt = 0;
+
+    // display adjustment instr
+    var display_adjust = {
+      type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
+      stimulus: 
+        "<p>Before beginning the experiment, please ensure that you are using a computer to complete the experiment, NOT a phone or tablet,</br>" +
+        "<br>and that you are in a dark room.</br>" +
+        "<br>Next, please take a look at the images below, and adjust your screen brightness until the image on the left is barely visible,</br>" +
+        "<br>and the image on the right is not visible.</br>" +
+        "Image placeholder" +
+        "</p><p>On Windows, brightness can be adjusted by navigating to Settings > System > Display, and moving the slider labeled Brightness all the way to the right."+
+        "<p>On Mac, brightness can be adjusted by navigating to System Settings > Displays, and moving the slider labeled Brightness all the way to the right." +
+          "<p>Click 'Continue' when you have adjusted your settings.</p>",
+        choices: ["Continue"],
+        post_trial_gap: 2000
+    };
+   timeline.push(display_adjust);  
           
     /* define testing instructions */
     var instructions = {
@@ -370,7 +387,7 @@ var validation_procedure = {
     prompt: "Select the item most similar to the item on top",
     sample :{
         type: 'without-replacement',
-        size: 5 // CHANGE THIS if you want a different number of validation trials per block
+        size: 5 // CHANGE THIS if you want a different number of validation trials per block; originally 5
     }
 };
       
@@ -381,7 +398,7 @@ var trial_procedure = {
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 20 // CHANGE THIS if you want a different number of regular trials per block
+        size: 20 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
     }
 };
           
@@ -397,15 +414,15 @@ var check_procedure = {
 };
       
     
-// total: 26 trials * 5
+// total: 5 validation trials, 20 regular trials, and 1 check trial, repeating 16 times = 416 trials total
+// 416 trials * 32 participants = 13312 responses total
 var procedure = {
     timeline: [trial_procedure, check_procedure, validation_procedure],
     randomize_order: true,
-    repetitions: 5
+    repetitions: 16
 };
       
       
-      // total number of social trials = (20*5) + (5*5) + (1*5) 130 trials *2 = 260
       
     var quick_break = {
       type: jsPsychHtmlButtonResponse,
@@ -419,7 +436,7 @@ var procedure = {
       timeline.push(quick_break);
       timeline.push(procedure);
 
-  //-----------------------------------------end ishihara-----------------------------------------
+  //-----------------------------------------color vision check-----------------------------------------
 
       // Ishihara color vision check //
   var ishihara_instructions = {
@@ -594,6 +611,15 @@ var demographics = {
                  ]
     };
     timeline.push(id_age);
+
+    var monitor_settings = {
+      type: jsPsychSurveyText,     // CHANGE THIS (written survey questions)
+      questions: [{prompt: "Please enter the make and model of your computer:", rows: 1, columns: 6, name: "age", required: true}, 
+                  {prompt: "If you have an external monitor that is different from the make/model of your computer, please enter the monitor model here:", rows: 1, columns: 60, name: "gender"},
+                  {prompt: "Please enter the color profile of your computer", rows : 1, columns: 40, name: "country"}
+                 ]
+    };
+    timeline.push(monitor_settings);
       
       
       
