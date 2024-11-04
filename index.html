@@ -307,7 +307,7 @@
             },
             button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
           on_finish: function(data){
-            console.log(arr_pair)
+           
               data.choices = arr_pair;
               n = 1;
                 var data_last = jsPsych.data.get().last(n);
@@ -331,7 +331,7 @@
             },
             button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
           on_finish: function(data){
-            console.log(arr_pair)
+            
               data.choices = arr_pair;
               if (data.response == jsPsych.timelineVariable('correct_choice')){
                   data.correct = true;
