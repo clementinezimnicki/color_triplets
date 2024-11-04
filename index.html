@@ -197,19 +197,21 @@
       
     var lasttrialdata_rt = 0;
 
-
     // display adjustment instr
     var display_adjust = {
       type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
       stimulus: 
         "<p>Before beginning the experiment, please ensure that you are using a computer to complete the experiment, NOT a phone or tablet,</br>" +
-        "<br>and that you are in a dark room.</br>" +
-        "<br>Next, please take a look at the images below, and adjust your screen brightness until the image on the left is barely visible,</br>" +
-        "<br>and the image on the right is not visible.</br>" +
-        "Image placeholder" +
-        "</p><p>On Windows, brightness can be adjusted by navigating to Settings > System > Display, and moving the slider labeled Brightness all the way to the right."+
-        "<p>On Mac, brightness can be adjusted by navigating to System Settings > Displays, and moving the slider labeled Brightness all the way to the right." +
-          "<p>Click 'Continue' when you have adjusted your settings.</p>",
+        "<br>and that you are in a dark room."+
+        "Next, please take a look at the set of squares below. Some match the background, while others will become visible when the screen brightness is adjusted."+
+        "Please adjust your screen brightness until you can see the illuminated squares, and report how many squares are visible.</br>" +
+        "</p><p>On Mac, brightness can be adjusted by navigating to System Settings > Displays."+
+            '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(89,89,89)"></div>'+
+            '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(91,91,91)"></div>'+
+            '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(89,89,89)"></div>'+
+            '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(86,86,86)"></div>'+
+            '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(91,91,91)"></div>'+
+       "<p>Click 'Continue' when you have adjusted your settings.</p>",
         choices: ["Continue"],
         post_trial_gap: 2000
     };
