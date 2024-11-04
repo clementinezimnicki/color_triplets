@@ -41,7 +41,7 @@
     });
 
     //set bg color to medium gray
-    document.body.style.backgroundColor = "rgb(89,89,89)" //(Gray)
+    document.body.style.backgroundColor = "rgb(89,89,89)" //(D65 illuminant gray)
     
     // generating a user id and file name  
     var secret_code  = jsPsych.randomization.randomID(8);
@@ -80,6 +80,7 @@
 
     var stimuli = [];
 
+    //the hex codes of all colors we are using
     for (i = 0; i < colorHex.length; i++){
         stimuli.push(
             {item: colorHex[i]},

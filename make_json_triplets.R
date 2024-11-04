@@ -1,6 +1,6 @@
 #install.packages("rjson")
 library("rjson")
-install.packages("jsonlite")
+#install.packages("jsonlite")
 library("jsonlite")
 
 setwd("~/Documents/GitHub/color_triplets")
