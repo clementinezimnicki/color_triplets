@@ -276,6 +276,7 @@
             },
             button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
             on_finish: function(data){
+                console.log(stimulus)
                 shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFICIED ABOVE
                 data.choices = arr_pair;
                 n = 1;
