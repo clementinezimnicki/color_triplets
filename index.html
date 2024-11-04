@@ -28,7 +28,7 @@
             box-sizing: content-box;  
             width: 500px;
             height: 100px;
-            padding: 0px;  
+            padding: 5px;  
             border: 5px solid black;
         }
 
@@ -237,13 +237,13 @@
             "Next, please take a look at the set of five squares below. Some squares are the same color as the background, while others are slightly darker or lighter. THe squares that differ from the background will become visible when the screen brightness is at maximum. "+
             "Please adjust your screen brightness until you can see the squares, and report how many of the five squares differ from the background.</br>" +
             "On Mac, brightness can be adjusted by navigating to System Settings > Displays.</p>"+
-            '<div class="wrapper">'+
+            <div id="wrapper">+
                 '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(89,89,89)"></div>'+
                 '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(90,90,90)"></div>'+
                 '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(89,89,89)"></div>'+
                 '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(88,88,88)"></div>'+
                 '<div style= "height:100px;width:100px;border:00px solid powderblue;display: inline-block; background:rgb(90,90,90)"></div>'+
-            '</div>'+
+            </div>+
             "<p>Click 'Continue' when you have adjusted your settings.</p>",
         html: '<p> There are <input name="first" type="text" /> squares.</p>'
     };
