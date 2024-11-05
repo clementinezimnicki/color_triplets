@@ -426,7 +426,7 @@ var check_procedure = {
     timeline_variables: check,
     prompt: "Select the item most similar to the item on top",
     sample: {
-        type: 'without-replacement',
+        type: 'with-replacement',//originally without 
         size: 8 // CHANGE THIS if you want a different number of check trials per block
     }
 };
