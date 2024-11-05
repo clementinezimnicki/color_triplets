@@ -405,7 +405,7 @@ var validation_procedure = {
     prompt: "Select the item most similar to the item on top",
     sample :{
         type: 'without-replacement',
-        size: 20 // CHANGE THIS if you want a different number of validation trials per block; originally 5
+        size: 10 // CHANGE THIS if you want a different number of validation trials per block; originally 5
     }
 };
       
@@ -426,8 +426,8 @@ var check_procedure = {
     timeline_variables: check,
     prompt: "Select the item most similar to the item on top",
     sample: {
-        type: 'with-replacement',//originally without 
-        size: 8 // CHANGE THIS if you want a different number of check trials per block
+        type: 'without-replacement',//originally without 
+        size: 2 // CHANGE THIS if you want a different number of check trials per block
     }
 };
 
@@ -439,16 +439,15 @@ var quick_break = {
 };
       
     
-    // 792 trials total
+    // 786 trials total
         // 60 are validation trials; 
         // 708 are "regular" trials
-        // 24 are attention checks
+        // 18 are attention checks
         // and repeat 12 times
-    var procedure = {
-        timeline: [trial_procedure, check_procedure, validation_procedure, quick_break],
+    var procedure1 = {
+        timeline: [trial_procedure, check_procedure, validation_procedure, check_procedure, validation_procedure, check_procedure, quick_break],
         randomize_order: true,
         repetitions:3
-        
     };
       
       
