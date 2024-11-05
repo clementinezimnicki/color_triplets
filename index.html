@@ -239,7 +239,7 @@
       type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
       stimulus: "<p>In each trial of this task, you will see three images: one target item on top, and two choices beneath the target item." +
         "</p><p>For each trial, <strong>please select the item that is most like the target item.</strong>"+
-        "<p>There may be trials with no obvious answer. In those cases, use your best judgement." +
+        "<p>There may be trials with no obvious answer. In those cases, use your best judgment." +
         "<p>There will be 2 rounds of this task with 130 trials per round. You will have the opportunity to take a break midway. </p>"+
           "<p>Click 'Continue' to begin the test.</p>",
         choices: ["Continue"],
@@ -263,7 +263,6 @@
       var arr_pair = [];
 
 // define the trials!
-      
       var trial = {
           type: jsPsychImageButtonResponse,
             stimulus: jsPsych.timelineVariable('item'),    // IF YOU CHANGED THE OBJECT NAMES IN YOUR ARRAY ABOVE, CHANGE THEM HERE TO MATCH     
@@ -279,7 +278,7 @@
             button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
             on_finish: function(data){
                 
-                shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFICIED ABOVE
+                shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFIED ABOVE
                 data.choices = arr_pair;
                 n = 1;
                 var data_last1 = jsPsych.data.get().last(n);
@@ -292,9 +291,6 @@
                 data.sampleAlg = "random";
             }
       };
-      
-      
-      
       
       // define the validation trials!
       var validation_trial = {
@@ -402,16 +398,14 @@
         return result;
     }
       
-// block/chunk of 5 validation trials
-// eg 25 random trials, 5 validation trials, then a random trial 
-// so that you know what is happening in each portion of the experiment
+
 var validation_procedure = {
     timeline: [fixation, validation_trial, if_node_speed],
     timeline_variables: validation_concat, //changed from just validation
     prompt: "Select the item most similar to the item on top",
     sample :{
         type: 'without-replacement',
-        size: 5 // CHANGE THIS if you want a different number of validation trials per block; originally 5
+        size: 20 // CHANGE THIS if you want a different number of validation trials per block; originally 5
     }
 };
       
@@ -421,8 +415,8 @@ var trial_procedure = {
     prompt: "Select the item most similar to the item on top",
     randomize_order: true,
     sample: {
-        type: 'with-replacement',
-        size: 20 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
+        type: 'without-replacement', //originally with replacement
+        size: 236 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
     }
 };
           
@@ -433,32 +427,35 @@ var check_procedure = {
     prompt: "Select the item most similar to the item on top",
     sample: {
         type: 'without-replacement',
-        size: 1 // CHANGE THIS if you want a different number of check trials per block
+        size: 8 // CHANGE THIS if you want a different number of check trials per block
     }
+};
+
+var quick_break = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
+    "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
+    choices: ["Continue"]
 };
       
     
-// total: 5 validation trials, 20 regular trials, and 1 check trial, repeating 16 times = 416 trials total
-// 416 trials * 32 participants = 13312 responses total
-var procedure = {
-    timeline: [trial_procedure, check_procedure, validation_procedure],
-    randomize_order: true,
-    repetitions: 16
-};
-      
-      
-      
-    var quick_break = {
-      type: jsPsychHtmlButtonResponse,
-      stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
-        "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
-        choices: ["Continue"]
+    // 792 trials total
+        // 60 are validation trials; 
+        // 708 are "regular" trials
+        // 24 are attention checks
+        // and repeat 12 times
+    var procedure = {
+        timeline: [trial_procedure, check_procedure, validation_procedure, quick_break],
+        randomize_order: true,
+        repetitions:3
+        
     };
+      
       
   // run the procedure twice with a break in between
       timeline.push(procedure);
-      timeline.push(quick_break);
-      timeline.push(procedure);
+      //timeline.push(quick_break);
+      //timeline.push(procedure);
 
   //-----------------------------------------color vision check-----------------------------------------
 
