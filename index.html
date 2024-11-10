@@ -627,7 +627,10 @@ var demographics = {
       type: jsPsychSurveyText,     // CHANGE THIS (written survey questions)
       questions: [{prompt: "Please enter your age (in years):", rows: 1, columns: 6, name: "age", required: true}, 
                   {prompt: "How do you currently describe your gender identity? Please specify.", rows: 1, columns: 60, name: "gender"},
-                  {prompt: "What country do you live in?", rows : 1, columns: 40, name: "country"}
+                  {prompt: "What country do you live in?", rows : 1, columns: 40, name: "country"},
+                  {prompt: "What was the first language you learned as a child?", rows : 1, columns: 40, name: "first_lang", required: true},
+                  {prompt: "What is the main language you use at home?", rows : 1, columns: 40, name: "main_lang", required: true},
+                  {prompt: "Which other language(s) can you speak, if any?", rows : 1, columns: 40, name: "all_lang", required: true},
                  ]
     };
     timeline.push(id_age);
