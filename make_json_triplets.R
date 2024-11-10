@@ -17,7 +17,7 @@ all_combinations <- combn(filenames2, 3)
 
 # Randomly sample 25 sets of combinations
 set.seed(123)  # Set seed for reproducibility
-sampled_sets <- all_combinations[, sample(ncol(all_combinations), 25)]
+sampled_sets <- all_combinations[, sample(ncol(all_combinations), 29)]
 
 # View the sampled sets
 #print(sampled_sets)
