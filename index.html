@@ -175,7 +175,53 @@
         return temp_array;
     }
       
+
       
+    //check if mac, and if not, redirect
+
+    // Check if the user is on a Mac
+        var isMac = navigator.platform.indexOf('Mac') !== -1;
+
+        // Define a function to handle non-Mac users
+        function checkMac() {
+        if (!isMac) {
+            return {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: "Sorry, this experiment is only available on a Mac. Press any key to exit."
+            };
+        } else {
+            return {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: "Welcome to the experiment. Press any key to begin."
+            };
+        }
+        }
+
+        // Add the appropriate welcome message based on the OS check
+        var macTrial = checkMac();
+
+        // Push the welcome message to the timeline
+        timeline.push(macTrial);
+
+        // If the user is not on a Mac, we can end the experiment right after the warning
+        if (!isMac) {
+        var exitTrial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: "You will now be redirected away from the experiment."
+        };
+        timeline.push(exitTrial);
+
+        // End the experiment after this message
+        var endExperiment = {
+            type: jsPsychInstructions,
+            pages: ["Thank you for your time, but unfortunately this experiment is only available on Mac computers."],
+            show_clickable_nav: true,
+            button_label_next: "Exit"
+        };
+        timeline.push(endExperiment);
+        }
+
+
     /* define welcome message trial */
     var welcome = {
       type: jsPsychHtmlKeyboardResponse,
