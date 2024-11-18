@@ -143,11 +143,12 @@
                     {head: 'img/A8664B.png',	choice_1: 'img/F1A78A.png',	choice_2: 'img/83764C.png'},
                 ]
 
+        
     //concatenate the random (25) validation trials with the chosen (32) validation trials, for a total of 57
     validation_concat = validationTrials.concat(validation);
 
     //list of 42 check trials that we made separately, in R. check_list is a var in JSON
-    var check_shuffled = jsPsych.randomization.repeat(checkTrials, 1);
+    var check_shuffled = jsPsych.randomization.repeat(checkList, 1);
     console.log(check_shuffled)
     
    //to shuffle the array of button choices at the beginning of the experiment   
