@@ -19,6 +19,7 @@
     <script src="jspsych/plugin-preload.js"></script>
     <script src="jspsych/plugin-image-button-response.js"></script>
     <script src ="colorNames.json"></script>
+    <script src ="checkTrials.json"></script>
     <script src ="validationRandom.json"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
@@ -142,27 +143,12 @@
                     {head: 'img/A8664B.png',	choice_1: 'img/F1A78A.png',	choice_2: 'img/83764C.png'},
                 ]
 
-    var check = [ // colors list: R- O- Y-- G-- B- I- V--- Bl-- W- Pi- Gray--
-                {head: 'img/000000.png',	choice_1: 'img/73CF10.png',	choice_2: 'img/000000.png', correct_choice: 1}, //compare black w light green
-                {head: 'img/0E8A19.png',	choice_1: 'img/0E8A19.png',	choice_2: 'img/F7A75A.png', correct_choice: 0}, //compare green with muted orange
-                {head: 'img/1C3D61.png',	choice_1: 'img/EA1D1D.png',	choice_2: 'img/1C3D61.png', correct_choice: 1}, // compare navy with red
-                {head: 'img/2E3086.png',	choice_1: 'img/2E3086.png',	choice_2: 'img/B9B9B9.png', correct_choice: 0}, // compare lighter navy with light gray
-                {head: 'img/E31B73.png',	choice_1: 'img/000000.png', choice_2: 'img/E31B73.png', correct_choice: 1}, //compare fuchsia with black
-                {head: 'img/E81A4B.png',	choice_1: 'img/E81A4B.png',	choice_2: 'img/FBA714.png', correct_choice: 0}, // cocmpare red with gold
-                {head: 'img/CD26C7.png',	choice_1: 'img/90689F.png',	choice_2: 'img/CD26C7.png', correct_choice: 1}, // compare violet with muted purple
-                {head: 'img/A553C8.png',	choice_1: 'img/A553C8.png',	choice_2: 'img/D5B811.png', correct_choice: 0}, //compare violet2 with gold
-                {head: 'img/FFFFFF.png',	choice_1: 'img/C7B88B.png',	choice_2: 'img/FFFFFF.png', correct_choice: 1}, // compare white with beige
-                {head: 'img/A8664B.png',	choice_1: 'img/A8664B.png',	choice_2: 'img/B9B9B9.png', correct_choice: 0}, // compare brown with light gray
-                {head: 'img/4DC7E8.png',	choice_1: 'img/E6A8B7.png',	choice_2: 'img/4DC7E8.png', correct_choice: 1} //compare light blue with muted pink
-    ]
-    
-
     //concatenate the random (25) validation trials with the chosen (32) validation trials, for a total of 57
     validation_concat = validationTrials.concat(validation);
-    //console.log(validation_concat)
-   // console.log(validationTrials)
-    
-    //console.log(validation_concat)
+
+    var check = check_list //list of 42 check trials that we made separately, in R. check_list is a var in JSON
+    var check_shuffled = jsPsych.randomization.repeat(check, 1);
+    console.log(check_shuffled)
     
    //to shuffle the array of button choices at the beginning of the experiment   
     function shuffle(array) {
@@ -263,126 +249,129 @@
       var arr_pair = [];
 
 // define the trials!
-      var trial = {
-          type: jsPsychImageButtonResponse,
-            stimulus: jsPsych.timelineVariable('item'),    // IF YOU CHANGED THE OBJECT NAMES IN YOUR ARRAY ABOVE, CHANGE THEM HERE TO MATCH     
-            choices: function(){
-                shuffle(stimuli_arr);
+    var trial = {
+        type: jsPsychImageButtonResponse,
+        stimulus: jsPsych.timelineVariable('item'),    // IF YOU CHANGED THE OBJECT NAMES IN YOUR ARRAY ABOVE, CHANGE THEM HERE TO MATCH     
+        choices: function(){
+            shuffle(stimuli_arr);
+            arr_pair = getRandomItems(stimuli_arr);
+            // the following makes sure the choices and stimulus are NOT the same!
+            while(arr_pair[0] == jsPsych.timelineVariable('item') || arr_pair[1] == jsPsych.timelineVariable('item')){
                 arr_pair = getRandomItems(stimuli_arr);
-                // the following makes sure the choices and stimulus are NOT the same!
-                while(arr_pair[0] == jsPsych.timelineVariable('item') || arr_pair[1] == jsPsych.timelineVariable('item')){
-                    arr_pair = getRandomItems(stimuli_arr);
-                }
-                return arr_pair;
-            },
-            button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
-            on_finish: function(data){
-                
-                shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFIED ABOVE
-                data.choices = arr_pair;
-                n = 1;
-                var data_last1 = jsPsych.data.get().last(n);
-                lasttrialdata_rt = data_last1.select('rt').mean();
-                if (lasttrialdata_rt < 900){
-                      data.speedy = true;
-                    } else {
-                      data.speedy = false; 
-                }
-                data.sampleAlg = "random";
             }
-      };
-      
-      // define the validation trials!
-      var validation_trial = {
-          type: jsPsychImageButtonResponse,
-            stimulus: function(){
-                row = validation_concat.pop(); //was just validation
-                head = row.head;
-                return head;},         
-            choices: function(){
-                arr_pair = [row.choice_1, row.choice_2];
-                return arr_pair;
-            },
-            button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
-          on_finish: function(data){
-           
-              data.choices = arr_pair;
-              n = 1;
-                var data_last = jsPsych.data.get().last(n);
-                lasttrialdata_rt = data_last.select('rt').mean();
-                if (lasttrialdata_rt < 1000){
-                      data.speedy = true;
-                    } else {
-                      data.speedy = false; 
-                }
-              data.sampleAlg = "validation"
-          }
-      };
-
-      // define the attention checks!
-      var check_trial = {
-          type: jsPsychImageButtonResponse,
-            stimulus: jsPsych.timelineVariable('head'),         
-            choices: function(){
-                arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
-                return arr_pair;
-            },
-            button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
-          on_finish: function(data){
+            return arr_pair;
+        },
+        button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
+        on_finish: function(data){
             
-              data.choices = arr_pair;
-              if (data.response == jsPsych.timelineVariable('correct_choice')){
-                  data.correct = true;
+            shuffle(stimuli_arr); // CHANGE THIS TO MATCH THE REGULAR ARRAY YOU SPECIFIED ABOVE
+            data.choices = arr_pair;
+            n = 1;
+            var data_last1 = jsPsych.data.get().last(n);
+            lasttrialdata_rt = data_last1.select('rt').mean();
+            if (lasttrialdata_rt < 900){
+                    data.speedy = true;
                 } else {
-                  data.correct = false; 
-              }
-              data.sampleAlg = "check";
-          }
-      };
-    
-        
-        var if_trial_check = {
-            type: jsPsychHtmlKeyboardResponse,
-            stimulus: "<p><strong>Incorrect!</strong></p>That was an attention check. Please pay attention while completing this task.<p>Press 'y' to continue.</p>",
-            choices:["y"]
+                    data.speedy = false; 
+            }
+            data.sampleAlg = "random";
         }
+    };
 
-        var if_node_check = {
-            timeline: [if_trial_check],
-            conditional_function: function(){
-                // get the data from the previous trial,
-                // and check which key was pressed
-                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-                if(last_trial_correct){
-                    return false; // the parameter value has to be returned from the function
+    //now make 706 repetitions of this
+      
+
+    // define the validation trials!
+    var validation_trial = {
+        type: jsPsychImageButtonResponse,
+        stimulus: function(){
+            row = validation_concat.pop();
+            head = row.head;
+            return head;},         
+        choices: function(){
+            arr_pair = [row.choice_1, row.choice_2];
+            return arr_pair;
+        },
+        button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
+        on_finish: function(data){
+            data.choices = arr_pair;
+            n = 1;
+            var data_last = jsPsych.data.get().last(n);
+            lasttrialdata_rt = data_last.select('rt').mean();
+            if (lasttrialdata_rt < 1000){
+                    data.speedy = true;
                 } else {
-                    return true; // the parameter value has to be returned from the function
-                }
+                    data.speedy = false; 
+            }
+            data.sampleAlg = "validation"
+        }
+    };
+
+    // define the attention checks
+    //
+    var check_trial = {
+        type: jsPsychImageButtonResponse,
+        stimulus: jsPsych.timelineVariable('head'),         
+        choices: function(){
+            arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
+            return arr_pair;
+        },
+        button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
+        on_finish: function(data){
+        
+            data.choices = arr_pair;
+            if (data.response == jsPsych.timelineVariable('correct_choice')){
+                data.correct = true;
+            } else {
+                data.correct = false; 
+            }
+            data.sampleAlg = "check";
+        }
+    };
+
+    
+    var if_trial_check = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<p><strong>Incorrect!</strong></p>That was an attention check. Please pay attention while completing this task.<p>Press 'y' to continue.</p>",
+        choices:["y"]
+    }
+
+    var if_node_check = {
+        timeline: [if_trial_check],
+        conditional_function: function(){
+            // get the data from the previous trial,
+            // and check which key was pressed
+            var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+            if(last_trial_correct){
+                return false; // the parameter value has to be returned from the function
+            } else {
+                return true; // the parameter value has to be returned from the function
             }
         }
-        
-        var if_trial_speed = {
-            type: jsPsychHtmlKeyboardResponse,
-            stimulus: "<p><strong>You're going too fast.</strong><p>Please slow down and assess each triplet." +
-                  "<p>Press 'y' to continue.</p></p>",
-            choices: ["y"]
-        }
+    }
+    
+    var if_trial_speed = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<p><strong>You're going too fast.</strong><p>Please slow down and assess each triplet." +
+                "<p>Press 'y' to continue.</p></p>",
+        choices: ["y"]
+    }
 
-        var if_node_speed = {
-            timeline: [if_trial_speed],
-            conditional_function: function(){
-                // get the data from the previous trial,
-                // and check which key was pressed
-                var last_trial_speed = jsPsych.data.get().last(1).values()[0].speedy;
-                if(last_trial_speed){
-                    return true; // the parameter value has to be returned from the function;
-                } else{
-                    return false;
-                }
+    var if_node_speed = {
+        timeline: [if_trial_speed],
+        conditional_function: function(){
+            // get the data from the previous trial,
+            // and check which key was pressed
+            var last_trial_speed = jsPsych.data.get().last(1).values()[0].speedy;
+            if(last_trial_speed){
+                return true; // the parameter value has to be returned from the function;
+            } else{
+                return false;
             }
         }
+    }
+
     
-       
     // okay so this is to get a random set of elements...  
     function getRandom(arr, n) {
         var result = new Array(n),
@@ -397,78 +386,72 @@
         }
         return result;
     }
-      
+        
 
-var validation_procedure = {
-    timeline: [fixation, validation_trial, if_node_speed],
-    timeline_variables: validation_concat, //changed from just validation
-    prompt: "Select the item most similar to the item on top",
-    sample :{
-        type: 'without-replacement',
-        size: 57 // CHANGE THIS if you want a different number of validation trials per block; originally 5
-    }
-};
+    var validation_procedure = {
+        timeline: [fixation, validation_trial, if_node_speed],
+        timeline_variables: validation_concat, //changed from just validation
+        prompt: "Select the item most similar to the item on top",
+        sample :{
+            type: 'without-replacement',
+            size: 2 // CHANGE THIS if you want a different number of validation trials per block; originally 5
+        }
+    };
 
-      
-var trial_procedure = {
-    timeline: [fixation, trial, if_node_speed],
-    timeline_variables: stimuli,
-    prompt: "Select the item most similar to the item on top",
-    randomize_order: true,
-    sample: {
-        type: 'with-replacement', //originally with replacement
-        size: 706 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
-    }
-};
+        
+    var trial_procedure = {
+        timeline: [fixation, trial, if_node_speed],
+        timeline_variables: stimuli,
+        prompt: "Select the item most similar to the item on top",
+        randomize_order: true,
+         sample: {
+            type: 'with-replacement', //originally with replacement
+            size: 17 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
+        }
+    };
 
-console.log(trial_procedure)
-      
-var check_procedure = {
-    timeline: [fixation, check_trial, if_node_check],
-    timeline_variables: check,
-    prompt: "Select the item most similar to the item on top",
-    sample: {
-        type: 'without-replacement',//originally without 
-        size: 37 // CHANGE THIS if you want a different number of check trials per block
-    }
-};
+    var check_procedure = {
+        timeline: [fixation, check_trial, if_node_check],
+        timeline_variables: check_shuffled,
+        prompt: "Select the item most similar to the item on top",
+        sample: {
+            type: 'without-replacement',//originally without 
+            size: 1 // CHANGE THIS if you want a different number of check trials per block
+        }
+    };
 
-var quick_break = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
-    "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
-    choices: ["Continue"]
-};
-      
-    
-    // 801 trials total
-        // 57 (25+32) are validation trials; 
-        // 706 are "regular" trials
-        // 38 attention checks (1 check per ~20 trials)
-    // 801/3 = 267
+    var quick_break = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
+        "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
+        choices: ["Continue"]
+    };
+        
 
+    // x trials total
+        // 84 (52+32) are validation trials; 
+        // 714 are "regular" trials, so 238 trials per block
+            //17*42 = 714
+            //17*14 = 238, 238 * 3 = 714
+        // 42 attention checks (1 check per ~17 real trials, or 1 check for every 14 repetitions)
+    //in each block there are:
+        //238 "regular" trials
+        //14 attention checks
+        //28 validation trials
 
     var procedure = {
         timeline: [trial_procedure, check_procedure, validation_procedure],
         randomize_order: true,
-        repetitions:1
+        repetitions: 14
     };
-      
-    //here's what we do
-    //we make 3 lists: trial_procedure, check_procedure, validation_procedure
-    //break each into 3, then concatenate them
-        // so we will have trial_procedure1, check_procedure1, validation_procedure1; etc
-    //randomize those so that everything is evenly distributed
-    //then we will end up with 3 unique lists of trials, each named procedure1, procedure2, procedure3
-
-
-      
-  // run the procedure twice with a break in between
-      timeline.push(procedure);
-      timeline.push(quick_break);
-      timeline.push(procedure);
-      timeline.push(quick_break);
-      timeline.push(procedure);
+        
+    // run the procedure 3 times with breaks in between
+    //all trials will be different; this repeats the *procedure*, not the trials
+    timeline.push(procedure);
+    timeline.push(quick_break);
+    timeline.push(procedure);
+    timeline.push(quick_break);
+    timeline.push(procedure);
 
   //-----------------------------------------color vision check-----------------------------------------
 

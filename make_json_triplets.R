@@ -19,27 +19,42 @@ all_combinations <- combn(filenames2, 3)
 set.seed(123)  # Set seed for reproducibility
 sampled_sets <- all_combinations[, sample(ncol(all_combinations), 29)]
 
+check_sample <- all_combinations[, sample(ncol(all_combinations), 42)]
+
 # View the sampled sets
 #print(sampled_sets)
 
 # Convert the sampled_sets matrix to a list of lists
-
 sets_list <- lapply(1:ncol(sampled_sets), function(i) {
   triplet <- sampled_sets[, i]
   list(paste("head:", triplet[1]), paste("choice_1:", triplet[2]), paste("choice_2:",triplet[3]))
 })
 
+#Convert the sampled_sets matrix to a list of lists
+# This time, though, choice_1 = head
+#there will also be code below where choice_2 = head
+check_list_1 <- lapply(1:21, function(i) {
+  triplet <- check_sample[, i]
+  list(paste("head:", triplet[1]), paste("choice_1:", triplet[1]), paste("choice_2:",triplet[3]), "correct_choice:0")
+})
+
+check_list_2 <- lapply(22:42, function(i) {
+  triplet <- check_sample[, i]
+  list(paste("head:", triplet[1]), paste("choice_1:", triplet[2]), paste("choice_2:",triplet[1]), "correct_choice:1")
+})
+
+
 # Format as an object without the outer array
-json_output <- gsub("\\\\", "",sets_list)
-#json_output <- gsub("^\\[\n|\\]\\s*$", "",json_output)
+json_output <- gsub("\\\\", "",check_list_1)
+json_output <- gsub("^\\[\n|\\]\\s*$", "",json_output)
 json_output <- gsub("list(", "",json_output, fixed=TRUE)
 json_output <- gsub("\\\\", "",json_output)
 
 
 # Convert the list to JSON
-json_output <- toJSON(json_output, auto_unbox=TRUE, pretty = TRUE)
+json_output <- toJSON(check_list_1, auto_unbox=TRUE, pretty = TRUE)
 
 # View the JSON output
 #cat(json_output)
-write(json_output, "validation_random.json")
+write(json_output, "check1.json")
 
