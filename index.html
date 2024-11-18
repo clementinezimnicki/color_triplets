@@ -408,6 +408,7 @@ var validation_procedure = {
         size: 57 // CHANGE THIS if you want a different number of validation trials per block; originally 5
     }
 };
+
       
 var trial_procedure = {
     timeline: [fixation, trial, if_node_speed],
@@ -419,6 +420,8 @@ var trial_procedure = {
         size: 706 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
     }
 };
+
+console.log(trial_procedure)
       
 var check_procedure = {
     timeline: [fixation, check_trial, if_node_check],
@@ -444,7 +447,7 @@ var quick_break = {
         // 38 attention checks (1 check per ~20 trials)
     // 801/3 = 267
 
-    
+
     var procedure = {
         timeline: [trial_procedure, check_procedure, validation_procedure],
         randomize_order: true,
