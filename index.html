@@ -405,7 +405,7 @@ var validation_procedure = {
     prompt: "Select the item most similar to the item on top",
     sample :{
         type: 'without-replacement',
-        size: 10 // CHANGE THIS if you want a different number of validation trials per block; originally 5
+        size: 57 // CHANGE THIS if you want a different number of validation trials per block; originally 5
     }
 };
       
@@ -416,10 +416,9 @@ var trial_procedure = {
     randomize_order: true,
     sample: {
         type: 'with-replacement', //originally with replacement
-        size: 236 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
+        size: 706 // CHANGE THIS if you want a different number of regular trials per block; it is originally 20
     }
 };
-          
       
 var check_procedure = {
     timeline: [fixation, check_trial, if_node_check],
@@ -427,7 +426,7 @@ var check_procedure = {
     prompt: "Select the item most similar to the item on top",
     sample: {
         type: 'without-replacement',//originally without 
-        size: 2 // CHANGE THIS if you want a different number of check trials per block
+        size: 37 // CHANGE THIS if you want a different number of check trials per block
     }
 };
 
@@ -439,22 +438,34 @@ var quick_break = {
 };
       
     
-    // 786 trials total
-        // 60 are validation trials; 
-        // 708 are "regular" trials
-        // 18 are attention checks
-        // and repeat 12 times
+    // 801 trials total
+        // 57 (25+32) are validation trials; 
+        // 706 are "regular" trials
+        // 38 attention checks (1 check per ~20 trials)
+    // 801/3 = 267
+
+    
     var procedure = {
-        timeline: [trial_procedure, check_procedure, validation_procedure, check_procedure, validation_procedure, check_procedure, quick_break],
+        timeline: [trial_procedure, check_procedure, validation_procedure],
         randomize_order: true,
-        repetitions:3
+        repetitions:1
     };
       
+    //here's what we do
+    //we make 3 lists: trial_procedure, check_procedure, validation_procedure
+    //break each into 3, then concatenate them
+        // so we will have trial_procedure1, check_procedure1, validation_procedure1; etc
+    //randomize those so that everything is evenly distributed
+    //then we will end up with 3 unique lists of trials, each named procedure1, procedure2, procedure3
+
+
       
   // run the procedure twice with a break in between
       timeline.push(procedure);
-      //timeline.push(quick_break);
-      //timeline.push(procedure);
+      timeline.push(quick_break);
+      timeline.push(procedure);
+      timeline.push(quick_break);
+      timeline.push(procedure);
 
   //-----------------------------------------color vision check-----------------------------------------
 
