@@ -1,4 +1,4 @@
-check_list = [{
+checkList = [{
     'head: img/5E2B3A.png',
     'choice_1: img/5E2B3A.png',
     'choice_2: img/FBA714.png',
