@@ -143,7 +143,6 @@
                     {head: 'img/A8664B.png',	choice_1: 'img/F1A78A.png',	choice_2: 'img/83764C.png'},
                 ]
 
-        
     //concatenate the random (25) validation trials with the chosen (32) validation trials, for a total of 57
     validation_concat = validationTrials.concat(validation);
 
@@ -693,10 +692,18 @@ var demographics = {
       type: jsPsychHtmlButtonResponse,
       stimulus: function(){
         // the secret code changes for different experiments on Prolific
-        output = "Great job! You have finished the experiment. <br> <strong> Here is your secret code: C18AM5PA </strong><br> Goodbye!<br><br>";
+        output = "Great job! You have finished the experiment. <br> "
+        + "Many researchers argue that even though people can differ in their experiences, biological constraints "
+        + "lead to most having very similar representations of the world, so that, for example, our representations of "
+        + "animals remain very similar between people."
+        + "We think that the amount that people differ has been consistently underestimated. One way that we are testing for this is "
+        + "through similarity tasks like the one in this experiment. We expect that people will systematically differ in their "
+        + "perceptions of how similar colors are to each other."
+        //+ "<strong> Here is your secret code: C18AM5PA </strong><br> Goodbye!<br><br>";
       return output;
       },
-      choices: ["<a href='https://app.prolific.com/submissions/complete?cc=C18AM5PA'>Complete Experiment</a>"]    
+      //choices: ["<a href='https://app.prolific.com/submissions/complete?cc=C18AM5PA'>Complete Experiment</a>"]    
+      choices: ["Complete Experiment"]
    };
     
     timeline.push(save_data);
@@ -718,7 +725,3 @@ var demographics = {
 
   </script>
   </html>
-
-<!--
-
--->
