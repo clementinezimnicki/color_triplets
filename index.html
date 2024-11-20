@@ -524,70 +524,56 @@
         }
     //
 
-   //Loop to present 6 ishihara plates of a unique type
-   var plateCounter = [0,0,0,0,0,0]
-   var numPlates = 6; 
+    //Loop to present 11 ishihara plates of a unique type
+   var plateCounter = [0,0,0,0,0,0,0,0,0,0,0]
+   var numPlates = 11; 
    for (plateNum = 0; plateNum < numPlates;){
 
-        //Randomly select which plate for a given type
-        var plate = getRandomIntInclusive(0,5);
+
+        //Randomly select which plate to present
+        var whichPlate = getRandomIntInclusive(0,10);
 
         //always present this plate first
         if (plateNum == 0){
-                plate = 0; 
                 whichPlate = 0;
                 answer  =  JSON.stringify({"ishihara":"12"});
         }
 
-        //present the other 5 in a random order
-        if (plate == 1 | plate == 3 | plate == 5){
-                whichPlate = getRandomIntInclusive(0,1);
-               if (plate == 1 & whichPlate == 0){
-                    answer = JSON.stringify({"ishihara":"8"});
-                }else if (plate == 1 & whichPlate == 1){
-                    answer = JSON.stringify({"ishihara":"29"}); 
-                }else if (plate == 3 & whichPlate == 0){
-                    answer = JSON.stringify({"ishihara":"6"}); 
-                }else if (plate == 3 & whichPlate == 1){
-                    answer = JSON.stringify({"ishihara":"45"});
-                }else if (plate == 5 & whichPlate == 0){
-                    answer = JSON.stringify({"ishihara":"26"}); 
-                }else if (plate == 5 & whichPlate == 1){
-                    answer = JSON.stringify({"ishihara":"42"});  
-                 }
-            }else if (plate == 2 | plate == 4){
-                whichPlate = getRandomIntInclusive(0,3);
-                if (plate == 2 & whichPlate == 0){
-                    answer = JSON.stringify({"ishihara":"5"}); 
-                }else if (plate == 2 & whichPlate == 1){
-                    answer = JSON.stringify({"ishihara":"3"}); 
-                }else if (plate == 2 & whichPlate == 2){
-                    answer = JSON.stringify({"ishihara":"15"});
-                }else if (plate == 2 & whichPlate == 3){
-                    answer = JSON.stringify({"ishihara":"74"}); 
-                }else if (plate == 4 & whichPlate == 0){
-                    answer = JSON.stringify({"ishihara":"5"}); 
-                }else if (plate == 4 & whichPlate == 1){
-                    answer = JSON.stringify({"ishihara":"7"}); 
-                }else if (plate == 4 & whichPlate == 2){
-                    answer = JSON.stringify({"ishihara":"16"}); 
-                }else if (plate == 4 & whichPlate == 3){
-                    answer = JSON.stringify({"ishihara":"73"}); 
-                }
-        }
-        //Check to ensure this plate not previously presented
-        if (plateCounter[plate] == 0) {
+        // specify correct answer
+        if (whichPlate == 1){
+            answer = JSON.stringify({"ishihara":"8"});
+        }else if (whichPlate == 2){
+            answer = JSON.stringify({"ishihara":"5"}); 
+        }else if (whichPlate == 3){
+            answer = JSON.stringify({"ishihara":"29"}); 
+        }else if (whichPlate == 4){
+            answer = JSON.stringify({"ishihara":"74"});
+        }else if (whichPlate == 5){
+            answer = JSON.stringify({"ishihara":"7"}); 
+        }else if (whichPlate == 6){
+            answer = JSON.stringify({"ishihara":"45"});  
+        }else if (whichPlate == 7){
+            answer = JSON.stringify({"ishihara":"2"}); 
+        }else if (whichPlate == 8){
+            answer = JSON.stringify({"ishihara":"16"});
+        }else if (whichPlate == 9){
+            answer = JSON.stringify({"ishihara":"35"}); 
+        }else if (whichPlate == 10){
+            answer = JSON.stringify({"ishihara":"96"}); 
 
+        }   
+        //Check to ensure this plate not previously presented
+        if (plateCounter[whichPlate] == 0) {
             //Present trial
             var ishihara_plate = {
                 type: jsPsychImageTextResponseMAS,
-                stimulus: "ishiharaPlateImg/IshiharaPlates-"+plate+"-"+whichPlate+".png", 
+                stimulus: "ishiharaPlateImg/ishihara-"+whichPlate+".png", 
                 stimulus_height: 400, 
                 correctAnswer: answer,
                 on_start: function(trial) {
                     correctAnswer = trial.correctAnswer}, //recorded in the "prompt" column of the output
                 questions: [
-                    { prompt: "Type what number you see. "+
+                    { prompt: "Carefully type what number you see. "+
                         "<p>If you do not see a number, type 'None'.",
                     rows: 1, 
                     columns: 1,
@@ -601,7 +587,7 @@
                                 data.correct = 0;}} //incorrect
                     }         
             timeline.push(ishihara_plate) 
-            plateCounter[plate] = 1; 
+            plateCounter[whichPlate] = 1; 
             plateNum++
         }
     }
