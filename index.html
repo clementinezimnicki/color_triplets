@@ -673,19 +673,18 @@ var demographics = {
     timeline.push(monitor_settings);
       
       
-      
    var goodbye = {
       type: jsPsychHtmlButtonResponse,
       stimulus: function(){
         // the secret code changes for different experiments on Prolific
-        output = "Great job! You have finished the experiment. <br> "
+        output = "<p>Great job! You have finished the experiment. <br> "
         + "Many researchers argue that even though people can differ in their experiences, biological constraints "
         + "lead to most having very similar representations of the world, so that, for example, our representations of "
         + "animals remain very similar between people."
         + "We think that the amount that people differ has been consistently underestimated. One way that we are testing for this is "
         + "through similarity tasks like the one in this experiment. We expect that people will systematically differ in their "
         + "perceptions of how similar colors are to each other."
-        + "You may now exit this page. Thank you for participating!"
+        + "You may now exit this page. Thank you for participating!</p>"
         //+ "<strong> Here is your secret code: C18AM5PA </strong><br> Goodbye!<br><br>";
       return output;
       },
@@ -695,6 +694,12 @@ var demographics = {
     
     timeline.push(save_data);
     timeline.push(goodbye);
+
+          //Exit fullscreen
+    timeline.push({
+    type: 'fullscreen',
+    fullscreen_mode: false
+    })
 
       
 //     // this is to save to normal server
