@@ -665,9 +665,9 @@ var demographics = {
 
     var monitor_settings = {
       type: jsPsychSurveyText,     // CHANGE THIS (written survey questions)
-      questions: [{prompt: "Please enter the make and model of your computer:", rows: 1, columns: 6, name: "age", required: true}, 
-                  {prompt: "If you have an external monitor that is different from the make/model of your computer, please enter the monitor model here. Otherwise, enter N/A.", rows: 1, columns: 60, name: "gender"},
-                  {prompt: "Please enter the color profile of your computer. On Mac, this can be found under Settings > Displays.", rows : 1, columns: 40, name: "country"}
+      questions: [{prompt: "Please enter the make and model of your computer:", rows: 1, columns: 30, name: "monitor", required: true}, 
+                  {prompt: "If you have an external monitor that is different from the make/model of your computer, please enter the monitor model here. Otherwise, enter N/A.", rows: 1, columns: 30, name: "monitor2"},
+                  {prompt: "Please enter the color profile of your computer. On Mac, this can be found under Settings > Displays.", rows : 1, columns: 30, name: "color_profile"}
                  ]
     };
     timeline.push(monitor_settings);
