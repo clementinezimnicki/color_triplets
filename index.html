@@ -187,7 +187,7 @@
         if (isMac) {
             return {
             type: jsPsychHtmlKeyboardResponse,
-            stimulus: "Sorry, this experiment is only available on a Mac. Press any key to exit."
+            stimulus: "Thank you for your time, but unfortunately this experiment is only available on Mac computers."
             };
         } else {
             return {
@@ -203,6 +203,7 @@
         // Push the welcome message to the timeline
         timeline.push(macTrial);
 
+       
         // If the user is not on a Mac, we can end the experiment right after the warning
         if (isMac) {
         var exitTrial = {
@@ -215,19 +216,18 @@
         var endExperiment = {
             type: jsPsychHtmlKeyboardResponse,
             pages: ["Thank you for your time, but unfortunately this experiment is only available on Mac computers."],
-            show_clickable_nav: true,
-            button_label_next: "Exit"
+            choices: jspsych.NO_KEYS
         };
         timeline.push(endExperiment);
         }
 
 
-    /* define welcome message trial */
+    /* define welcome message trial 
     var welcome = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "Welcome to the experiment. Press any key to begin."
     };
-    timeline.push(welcome);
+    timeline.push(welcome);*/
       
       
     timeline.push({
