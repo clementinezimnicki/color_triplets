@@ -214,6 +214,7 @@
     var consent = {
         type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
         stimulus: 
+            "<body margin:5>" +
             "<p><font size='5'> <strong>UNIVERSITY OF WISCONSIN-MADISON</strong></font><br>" +
             "<strong>Research Participant Information and Consent Form</strong></p>" +
             "<p align='left'><strong>Title of the Study:</strong> Learning meanings of words and objects<br>" +
@@ -225,7 +226,7 @@
             "You have been asked to participate because you are between the ages of 18 and 30.  Your participation is voluntary." +
             "Research will be conducted in an experiment room in the Brogden Psychology building located on the UW-Madison campus at 1202 W. Johnson St." +
             
-            "<p align='left'><font size='5'><strong>WHAT WILL MY PARTICIPATION INVOLVE?</strong></font></p>" +
+            "<p align='left'><font size='4'><strong>WHAT WILL MY PARTICIPATION INVOLVE?</strong></font></p>" +
             "<p align='left'>Participants will be asked to complete one session of less than one hour, during which time you will be asked to sit in front of a computer screen." +
             "You will hear or read individual words or view pictures on the computer screen.  You will be asked either to press keys on the keyboard in response to the words" +
             "or pictures, or to speak a response aloud.  In some cases your eye movements will be monitored with an eye-tracking machine while you respond.</p>" +
@@ -264,7 +265,10 @@
 
             "<p align='left'>Your participation is completely voluntary. If you decide not to participate or to withdraw from the study it will have no effect on your grade in this class." +
             "Your signature indicates that you have read this consent form, had an opportunity to ask any questions about your participation in this research and voluntarily consent to participate." +
-            "You will receive a copy of this form for your records.</p>",
+            "You will receive a copy of this form for your records.</p>" +
+            "</body>"
+            ,
+
         choices: ["Consent and continue"]
     };
     timeline.push(consent);  
