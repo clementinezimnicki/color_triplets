@@ -592,7 +592,7 @@
     var validation_procedure = {
         timeline: [fixation, validation_trial, if_node_speed],
         timeline_variables: validation_concat, //changed from just validation
-        prompt: "Select the item most similar to the item on top",
+        //prompt: "Select the item most similar to the item on top",
         sample :{
             type: 'without-replacement',
             size: 2 // CHANGE THIS if you want a different number of validation trials per block; originally 5
@@ -603,7 +603,7 @@
     var trial_procedure = {
         timeline: [fixation, trial, if_node_speed],
         timeline_variables: stimuli,
-        prompt: "Select the item most similar to the item on top",
+        //tem most similar to the item on top",
         randomize_order: true,
          sample: {
             type: 'with-replacement', //originally with replacement
@@ -614,7 +614,7 @@
     var check_procedure = {
         timeline: [fixation, check_trial, if_node_check],
         timeline_variables: check_shuffled,
-        prompt: "Select the item most similar to the item on top",
+        //prompt: "Select the item most similar to the item on top",
         sample: {
             type: 'without-replacement',//originally without 
             size: 1 // CHANGE THIS if you want a different number of check trials per block
@@ -624,7 +624,7 @@
     var quick_break = {
         type: jsPsychHtmlButtonResponse,
         stimulus: "Nice job! Feel free to take a quick break, then click 'Continue' when you are ready proceed to the next round." +
-        "<p>Remember, your task is to <strong>select the item closest to the item on top.</strong>",
+        "<p>Remember, your task is to <strong>select the item most similar to the item on top.</strong>",
         choices: ["Continue"]
     };
         
