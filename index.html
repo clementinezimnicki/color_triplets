@@ -206,16 +206,17 @@
        
         // If the user is not on a Mac, we can end the experiment right after the warning
         if (isMac) {
+            /*
             var exitTrial = {
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: "You will now be redirected away from the experiment."
             };
             timeline.push(exitTrial);
-
+            */
             // End the experiment after this message
             var endExperiment = {
                 type: jsPsychHtmlKeyboardResponse,
-                stimulus: "Thank you for your time, but unfortunately this experiment is only available on Mac computers.",
+                stimulus: "Thank you for your time, but unfortunately this experiment is only available on Mac computers. You may now exit this window.",
                 choices: "NO_KEYS"
             };
             timeline.push(endExperiment);
