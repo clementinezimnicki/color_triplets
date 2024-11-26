@@ -184,7 +184,7 @@
 
         // Define a function to handle non-Mac users
         function checkMac() {
-        if (!isMac) {
+        if (isMac) {
             return {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: "Sorry, this experiment is only available on a Mac. Press any key to exit."
