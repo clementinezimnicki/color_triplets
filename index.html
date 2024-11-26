@@ -184,7 +184,7 @@
 
         // Define a function to handle non-Mac users
         function checkMac() {
-        if (isMac()) {
+        if (isMac) {
             return {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: "Sorry, this experiment is only available on a Mac. Press any key to exit."
@@ -204,7 +204,7 @@
         timeline.push(macTrial);
 
         // If the user is not on a Mac, we can end the experiment right after the warning
-        if (isMac()) {
+        if (isMac) {
         var exitTrial = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: "You will now be redirected away from the experiment."
