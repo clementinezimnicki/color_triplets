@@ -36,6 +36,15 @@
             border: 2px solid black;
         }
 
+        div {
+            border: 1px solid black;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-right: 150px;
+            margin-left: 80px;
+            background-color: lightblue;
+        }
+
     </style>
   </head>
   <body></body>
@@ -214,7 +223,7 @@
     var consent = {
         type: jsPsychHtmlButtonResponse, // CHANGE THIS (instructions)
         stimulus: 
-            "<body margin:20>" +
+            "<div>" +
             "<p><font size='5'> <strong>UNIVERSITY OF WISCONSIN-MADISON</strong></font><br>" +
             "<strong>Research Participant Information and Consent Form</strong></p>" +
             "<p align='left'><strong>Title of the Study:</strong> Learning meanings of words and objects<br>" +
@@ -266,7 +275,7 @@
             "<p align='left'>Your participation is completely voluntary. If you decide not to participate or to withdraw from the study it will have no effect on your grade in this class." +
             "Your signature indicates that you have read this consent form, had an opportunity to ask any questions about your participation in this research and voluntarily consent to participate." +
             "You will receive a copy of this form for your records.</p>" +
-            "</body>"
+            "</div>"
             ,
 
         choices: ["Consent and continue"]
