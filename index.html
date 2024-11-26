@@ -294,7 +294,7 @@
     };
 */
     // define the trials!
-    var trial_texture = {
+    var trial = {
         type: jsPsychImageKeyboardResponse,
         stimulus: jsPsych.timelineVariable('item'),
         choices: ['ArrowLeft', 'ArrowRight'],
@@ -445,7 +445,7 @@
     // Define the attention checks with keyboard responses
     var check_trial = {
         type: jsPsychImageKeyboardResponse,
-        stimulus: jsPsych.timelineVariable("head"),  // Display the head image
+        stimulus: jsPsych.timelineVariable('head'),  // Display the head image
         choices: ['ArrowLeft', 'ArrowRight'],  // Use arrow keys for choices
 
         on_start: function (trial) {
