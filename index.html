@@ -299,14 +299,14 @@
         stimulus: jsPsych.timelineVariable('item'),
         choices: ['ArrowLeft', 'ArrowRight'],
         on_start: function (trial) {
-            shuffle(texture_arr);
-            arr_pair = getRandomItems(texture_arr);
+            shuffle(stimuli_arr);
+            arr_pair = getRandomItems(stimuli_arr);
             // the following makes sure the choices and stimulus are NOT the same!
             while (
                 arr_pair[0] == jsPsych.timelineVariable('item') ||
                 arr_pair[1] == jsPsych.timelineVariable('item')
             ) {
-                arr_pair = getRandomItems(texture_arr);
+                arr_pair = getRandomItems(stimuli_arr);
             }
             console.log("Choices:", arr_pair);
             trial.prompt = `
