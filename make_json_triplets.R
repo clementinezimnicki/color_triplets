@@ -17,9 +17,9 @@ all_combinations <- combn(filenames2, 3)
 
 # Randomly sample 25 sets of combinations
 set.seed(123)  # Set seed for reproducibility
-sampled_sets <- all_combinations[, sample(ncol(all_combinations), 29)]
+sampled_sets <- all_combinations[, sample(ncol(all_combinations), 52)]#validation trials
 
-check_sample <- all_combinations[, sample(ncol(all_combinations), 42)]
+check_sample <- all_combinations[, sample(ncol(all_combinations), 42)]#check trials
 
 # View the sampled sets
 #print(sampled_sets)
@@ -45,16 +45,16 @@ check_list_2 <- lapply(22:42, function(i) {
 
 
 # Format as an object without the outer array
-json_output <- gsub("\\\\", "",check_list_1)
+#json_output <- gsub("\\\\", "",check_list_1)
 json_output <- gsub("^\\[\n|\\]\\s*$", "",json_output)
 json_output <- gsub("list(", "",json_output, fixed=TRUE)
 json_output <- gsub("\\\\", "",json_output)
 
 
 # Convert the list to JSON
-json_output <- toJSON(check_list_1, auto_unbox=TRUE, pretty = TRUE)
+json_output <- toJSON(sets_list, auto_unbox=TRUE, pretty = TRUE)
 
 # View the JSON output
 #cat(json_output)
-write(json_output, "check1.json")
+write(json_output, "validationRandom.json")
 
