@@ -67,7 +67,7 @@
       const save_data = { 
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "W31dcwJTrTgj", //change this for different experiments in datapipe
+        experiment_id: "fL1GbwczvGKV", // SONA = "W31dcwJTrTgj", //change this for different experiments in datapipe
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
       };
@@ -568,30 +568,6 @@
         }
     };
 
-
-/*
-    // define the attention checks
-    //
-    var check_trial = {
-        type: jsPsychImageButtonResponse,
-        stimulus: jsPsych.timelineVariable('head'),         
-        choices: function(){
-            arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
-            return arr_pair;
-        },
-        button_html: '<button class="jspsych-btn-ckz"><img src= %choice%></button>',
-        on_finish: function(data){
-        
-            data.choices = arr_pair;
-            if (data.response == jsPsych.timelineVariable('correct_choice')){
-                data.correct = true;
-            } else {
-                data.correct = false; 
-            }
-            data.sampleAlg = "check";
-        }
-    };
-*/
     
     var if_trial_check = {
         type: jsPsychHtmlKeyboardResponse,
