@@ -75,6 +75,9 @@
     //var secret_code = jsPsych.data.urlVariables().id;
     //var filename = "triplets_colors_" + secret_code + "_part1.csv"; // CHANGE THIS (file name)
 
+    //const subject_id = jsPsych.randomization.randomID(10);
+    const filename = `${subject_id}.csv`;
+
     // this is to save to OSF using DataPipe
     //if want to save data more often, copy this and change the name, and save halfway through
       const save_data = { 
@@ -894,10 +897,13 @@ var demographics = {
         //+ "<strong> Here is your secret code: C18AM5PA </strong><br> Goodbye!<br><br>";
       return output;
       },
-      //choices: ["<a href='https://app.prolific.com/submissions/complete?cc=C18AM5PA'>Complete Experiment</a>"]    
-      choices: ["Complete Experiment"]
+      choices: ["<a href='https://app.prolific.com/submissions/complete?cc=CBWFX0NG'>Complete Experiment</a>"]    
+      //choices: "NO_KEYS"
    };
-    
+  
+
+  
+
     timeline.push(save_data);
     timeline.push(goodbye);
 
