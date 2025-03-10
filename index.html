@@ -57,10 +57,23 @@
 
     //set bg color to medium gray
     document.body.style.backgroundColor = "rgb(89,89,89)" //(D65 illuminant gray)
+
+    var jsPsych = initJsPsych();
+
+    // capture info from Prolific
+    var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+    var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+
+    jsPsych.data.addProperties({
+    subject_id: subject_id,
+    study_id: study_id,
+    session_id: session_id
+    });
     
     // generating a user id and file name  
-    var secret_code = jsPsych.data.urlVariables().id;
-    var filename = "triplets_colors_" + secret_code + "_part1.csv"; // CHANGE THIS (file name)
+    //var secret_code = jsPsych.data.urlVariables().id;
+    //var filename = "triplets_colors_" + secret_code + "_part1.csv"; // CHANGE THIS (file name)
 
     // this is to save to OSF using DataPipe
     //if want to save data more often, copy this and change the name, and save halfway through
@@ -76,7 +89,7 @@
     var timeline = [];
       
     // pulling info re: mechanical turk hit
-    var urlvar = jsPsych.data.urlVariables();  
+    //var urlvar = jsPsych.data.urlVariables();  
       
     //console.log(colorNames)
     //console.log(colorHex)
